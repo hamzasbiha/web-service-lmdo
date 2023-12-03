@@ -22,7 +22,7 @@ const Login = () => {
     const formdata = new FormData(e.currentTarget);
     const user = Object.fromEntries(formdata);
     try {
-      const res = await axios.post(`${BaseUrl}/api/auth/signin`, user);
+      const res = await axios.post(`${BaseUrl}/auth/signin`, user);
       sessionStorage.setItem("access", res.data.accesToken);
       navigation(-1);
       toast.success("Welcome");
