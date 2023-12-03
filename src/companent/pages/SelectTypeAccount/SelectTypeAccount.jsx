@@ -1,9 +1,21 @@
 import "./SelectTypeAccount.scss";
+import { useState } from "react";
 import Backdrop from "@mui/material/Backdrop";
-import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
 
 export const SelectTypeAccount = () => {
+  const [open, setOpen] = useState(false);
+  const [age, setAge] = useState("");
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleOpen = () => {
+    setOpen(true);
+  };
   return (
     <div>
       <Button onClick={handleOpen}>Show backdrop</Button>
@@ -12,7 +24,24 @@ export const SelectTypeAccount = () => {
         open={open}
         onClick={handleClose}
       >
-        <CircularProgress color="inherit" />
+        <div className="modal">
+          {/* <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Age</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={age}
+                label="Age"
+                onChange={handleChange}
+              >
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+            </FormControl>
+          </Box> */}
+        </div>
       </Backdrop>
     </div>
   );

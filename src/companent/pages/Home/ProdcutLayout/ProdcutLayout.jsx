@@ -20,7 +20,7 @@ const ProdcutLayout = () => {
   useEffect(() => {
     dispatch(fetchProdcuts(filter));
     handleFilterChange();
-  }, [catgo]);
+  }, [catgo, pages]);
 
   const handleFilterChange = (selecFilt) => {
     const filt = data.filter(
@@ -29,7 +29,7 @@ const ProdcutLayout = () => {
     );
     setFilteredData(filt);
   };
-
+  console.log(data);
   return (
     <div className="ProdcutLayout">
       <div className="wrapper">

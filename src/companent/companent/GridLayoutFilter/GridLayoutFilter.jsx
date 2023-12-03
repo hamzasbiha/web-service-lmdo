@@ -1,9 +1,8 @@
 import React from "react";
 import "./GridLayoutFilter.scss";
-import img1 from "../../../assets/resource/widget4.jpg";
-import img2 from "../../../assets/resource/widget2.jpg";
+import img1 from "../../../assets/resource/oiseauxjpg.jpg";
+import img2 from "../../../assets/resource/cat.jpg";
 import img3 from "../../../assets/resource/widget.jpg";
-import img4 from "../../../assets/resource/widget5.jpg";
 import { useTranslation } from "react-i18next";
 const GridLayoutFilter = () => {
   const { t, i18n } = useTranslation();
@@ -33,14 +32,6 @@ const GridLayoutFilter = () => {
             </div>
             <div className="image">
               <img alt="widg-2" src={img2} />
-            </div>
-          </div>
-          <div className="row-1">
-            <div className="hover-effect">
-              <h1>see All</h1>
-            </div>
-            <div className="image">
-              <img src={img2} alt="" className="mainImg" />
             </div>
           </div>
         </div>
