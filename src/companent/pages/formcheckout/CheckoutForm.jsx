@@ -13,7 +13,6 @@ const CheckoutForm = ({
   currentStep,
 }) => {
   const [phoneNeeds, setPHoneNeeds] = useState(false);
-  const [Showlist, setShowList] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const cartitems = useSelector((state) => state.cart.cart);
@@ -21,7 +20,6 @@ const CheckoutForm = ({
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const userInformation = Object.fromEntries(formData);
-
     setFiled({ userInformation });
     setCurrentStep(2);
   };
@@ -130,11 +128,13 @@ const CheckoutForm = ({
                 </div>
               </div>
               <div className="button-form">
+              <div></div>
                 <Link to={"/"} className="link">
                   Annuler
                 </Link>
-                <button type="submit">Continuer</button>
-                <Icon.KeyboardArrowRight />
+                <button type="submit">
+                  Continuer <Icon.KeyboardArrowRight fontSize="small" />
+                </button>
               </div>
             </form>
           </div>
@@ -166,9 +166,7 @@ const CheckoutForm = ({
                             <div>
                               <b>Price :</b>
                             </div>
-                            <b>
-                              {item.priceForCompany}TND{" "}
-                            </b>
+                            <b>{item.priceForCompany}TND </b>
                             <b>QTE :</b>
                             <p>{item.QTE} </p>
                           </div>
@@ -216,9 +214,6 @@ const CheckoutForm = ({
             </div>
           </div>
         </div>
-      </div>
-      <div className="bottom">
-        <FeaturedProducts />
       </div>
     </div>
   );

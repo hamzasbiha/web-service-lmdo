@@ -4,7 +4,7 @@ import NewCard from "../newProdcuts/NewCard";
 import { useSelector } from "react-redux";
 import Skeleton from "react-loading-skeleton";
 import { useTranslation } from "react-i18next";
-const FeaturedProducts = () => {
+const FeaturedProducts = ({}) => {
   const { t, i18n } = useTranslation();
   const data = useSelector((state) => state.product.Product);
   const filtreddata = [...data].sort(

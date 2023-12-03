@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import * as Icon from "@mui/icons-material";
+import sucess from "../../../assets/lottie/success.json";
+import Lottie from "lottie-react";
 import "./SuccesOrder.scss";
 import { useDispatch } from "react-redux";
 import { restCart } from "../../../redux/cartSlice";
@@ -18,7 +20,7 @@ const SuccesOrder = () => {
         </p>
       </div>
       <div className="icon">
-        <Icon.DoneAll />
+        <Lottie animationData={sucess} />
       </div>
       <Link to={"/"} className="link" onClick={() => dispatch(restCart())}>
         <button>Continue Shopping</button>

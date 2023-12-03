@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import animation1 from "../../../assets/lottie/animation1.json";
-import Lottie from "lottie-react";
-import { useLottie } from "lottie-react";
 import { addtocart, updateCartItemQuantity } from "../../../redux/cartSlice";
 import "./Product.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchOneProdcut } from "../../../redux/products/productSlice";
-import FeaturedProducts from "../../companent/featuredProuducts/FeaturedProducts";
+import { Blurhash } from "react-blurhash";
+import { iterate } from "localforage";
 
 const Product = () => {
   const { id } = useParams();
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const user = useSelector((state) => state.user.user);
   const [ImageLoad, setImageLoad] = useState(false);
   const cartlist = useSelector((state) => state.cart.cart);
@@ -19,11 +16,8 @@ const Product = () => {
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const selectedProduct = useSelector((state) => state.product.SingleProduct);
-  const options = {
-    animationData: animation1,
-    loop: true,
-  };
-  const { View } = useLottie(options);
+  console.log(selectedProduct);
+  useEffect(() => {}, [id]);
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(fetchOneProdcut(id));
@@ -32,14 +26,11 @@ const Product = () => {
       setImageLoad(true);
     };
     img.src = selectedProduct.images;
-    const updateWindowWidth = () => {
-      setWindowWidth(window.innerWidth);
-    };
-    window.addEventListener("resize", updateWindowWidth);
-    return () => {
-      window.removeEventListener("resize", updateWindowWidth);
-    };
-  }, [id, ImageLoad, windowWidth]);
+  }, [id, ImageLoad]);
+
+  const handleImageSelect = (index) => {
+    setSelectedImage(index);
+  };
 
   const getItemQuantityInCart = (itemId) => {
     const itemInCart = cartlist.find((item) => item.id === itemId);
@@ -73,84 +64,71 @@ const Product = () => {
       }
     }
   };
-  console.log(windowWidth > 1900);
+
   return (
-    <>
-      <div className="product">
+    <></>
+    <div className="product">
+      <div className="wrapper">
         <div className="left">
-          {windowWidth > 900 ? (
-            <>
-              <div className="images">
-                {ImageLoad ? (
-                  selectedProduct.images.slice(0, 3).map((item, index) => {
-                    return (
-                      <React.Fragment key={item.id}>
-                        <img
-                          alt="list-img"
-                          src={item}
-                          onClick={() => setSelectedImage(index)}
-                        />
-                      </React.Fragment>
-                    );
-                  })
-                ) : (
-                  <Lottie animationData={animation1} loop={true} />
-                )}
-              </div>
-              <div className="main-img">
-                {ImageLoad ? (
-                  <img alt="" src={selectedProduct.images[selecteImage]} />
-                ) : (
-                  <Lottie
-                    animationData={animation1}
-                    loop={true}
-                    color="#a7c957"
+          <div className="left-product">
+            <div className="row-image">
+
+              {ImageLoad &&
+                selectedProduct.images.map((item, index) => {
+                  return (
+                    <div key={item.id}>
+                      <img
+                        alt=""
+                        src={item}
+                        onClick={() => setSelectedImage(index)}
+                      />
+                    </div>
+                  );
+                })}
+            </div>
+            <div className="main-image">
+              <div>
+                {ImageLoad && (
+                  <img
+                    alt=""
+                    src={selectedProduct.images[selecteImage]}
+                    // loading="lazy"
                   />
                 )}
               </div>
-            </>
-          ) : (
-            <>
-              <div className="main-img">
-                {ImageLoad && (
-                  <img alt="" src={selectedProduct.images[selecteImage]} />
-                )}
-              </div>
-              <div className="images">
-                {ImageLoad &&
-                  selectedProduct.images.slice(0, 3).map((item, index) => {
-                    return (
-                      <React.Fragment key={item.id}>
-                        <img
-                          alt="list-img"
-                          src={item}
-                          onClick={() => setSelectedImage(index)}
-                        />
-                      </React.Fragment>
-                    );
-                  })}
-              </div>
-            </>
-          )}
+            </div>
+          </div>
         </div>
         <div className="right">
-          <h1>{selectedProduct.title}</h1>
-          <div>
-            <span>
-              Brands:<span className="item">{selectedProduct.market}</span>
-            </span>
+          <div className="title">
+            <h1>{selectedProduct.title} </h1>
           </div>
-          <span>
-            <span className="item-price ">
-              {selectedProduct.priceForPersonal}TND
-            </span>
-          </span>
-          <span>
-            quantity : <span className="item">{selectedProduct.quantity}</span>
-          </span>
-          <span>
-            Categories :<span className="item">{selectedProduct.category}</span>
-          </span>
+          <div className="category">
+            <div className="row">
+              <div>
+                <span>Catgoire : </span>
+              </div>
+              <div className="cato">{selectedProduct.category} </div>
+            </div>
+          </div>
+          <div className="priceForCompany">
+            <div className="row">
+              <div>
+                <span>Prix : </span>
+              </div>
+              <div className="cato">
+                {selectedProduct.priceForPersonal}.00 TND{" "}
+              </div>
+            </div>
+          </div>
+          <div className="quantity">
+            <div className="row">
+              <div>
+                <span>Stock : </span>
+              </div>
+              <div className="cato">{selectedProduct.stock} </div>
+            </div>
+          </div>
           <div className="add-cart-dec">
             <button onClick={() => handleDecreaseQuantity(selectedProduct)}>
               -
@@ -159,6 +137,8 @@ const Product = () => {
             <button onClick={() => handleIncreaseQuantity(selectedProduct)}>
               +
             </button>
+          </div>
+          <div className="add-cart">
             <button
               onClick={() => {
                 dispatch(
@@ -168,13 +148,13 @@ const Product = () => {
                   )
                 );
               }}
-              className="btn-add"
             >
               Ajoute au pannier
             </button>
           </div>
         </div>
       </div>
+      <div className="divier-spon"></div>
       <div className="bottom">
         <div className="divier"></div>
         <div>
@@ -193,12 +173,11 @@ const Product = () => {
             <li>25 kg</li>
           </ul>
         </div>
-        <h1>Related Products</h1>
         <div className="similar">
-          <FeaturedProducts />
+          <h1>Similar Products</h1>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

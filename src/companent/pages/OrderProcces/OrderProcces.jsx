@@ -16,7 +16,11 @@ const OrderProcces = () => {
       switch (currentStep) {
         case 1:
           // Check if userCart has information
-          if (userCart && userCart.order_Items && userCart.order_Items.length !== 0) {
+          if (
+            userCart &&
+            userCart.order_Items &&
+            userCart.order_Items.length !== 0
+          ) {
             setOldClient(userCart);
             setCurrentStep(2);
           }
@@ -26,6 +30,7 @@ const OrderProcces = () => {
           if (Object.keys(filed).length !== 0) {
             setCurrentStep(2);
           }
+          
           break;
         default:
           break;
@@ -34,7 +39,7 @@ const OrderProcces = () => {
     validet();
   }, [currentStep]);
 
-  console.log(userCart);
+
   return (
     <div className="order">
       <div className="wrapper">

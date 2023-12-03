@@ -35,7 +35,7 @@ const Order = () => {
     const updateData = { status: Status };
     dispatch(updatecart({ token: token, id: id, inputs: updateData }));
     setChangeStatus(false);
-    setToggle(true)
+    setToggle(true);
   };
   return (
     <div className="order">

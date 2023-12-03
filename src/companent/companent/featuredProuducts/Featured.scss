@@ -1,16 +1,16 @@
 @import "../../../style/responsive.scss";
 
 .featured {
-  padding: 0;
+  padding: 10px;
   display: flex;
   align-items: center;
-  text-align: center;
+  text-align: start;
   justify-content: center;
   flex-direction: column;
   width: auto;
-
   h1 {
     font-size: 45px;
+    text-align: start;
     &::first-letter {
       color: #40916c;
       font-size: 3rem;
@@ -28,7 +28,6 @@
     width: 100%;
     height: 500px;
     padding: 20px;
-    border-radius: 15px;
     .center {
       @include xxl {
         overflow-x: scroll;
@@ -36,10 +35,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width:100%;
+      width: 100%;
       height: 450px;
       gap: 35px;
-      border-radius: 95px;
     }
   }
 }

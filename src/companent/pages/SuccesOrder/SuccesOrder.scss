@@ -10,16 +10,16 @@
   gap: 20px;
   .icon {
     font-size: 40px;
-    transform: scale(3);
   }
   button {
     border: none;
     outline: none;
     height: 45px;
-    width: 200px;
-    background-color: #38b000;
+    width: 250px;
+    background-color: #57cc99;
     font-weight: bold;
     font-size: 15px;
-    border-radius: 5px;
+    border-radius: 25px;
+    cursor: pointer;
   }
 }

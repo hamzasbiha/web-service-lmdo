@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Register.scss";
 import { Link, useNavigate } from "react-router-dom";
+import GoogleButton from "react-google-button";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -65,10 +66,9 @@ const Register = () => {
         email: userInfo.data.email,
         accountType: "Personal",
       };
-      console.log(user);
-      const myResponse = await axios.post(`${BaseUrl}/api/auth/google`, user);
-      sessionStorage.setItem("access", myResponse.data.accesToken);
-      navigation("/");
+      // const myResponse = await axios.post(`${BaseUrl}/api/auth/google`, user);
+      // sessionStorage.setItem("access", myResponse.data.accesToken);
+      navigation("/type");
     },
     onError: (errorResponse) => console.log(errorResponse),
   });
@@ -236,18 +236,7 @@ const Register = () => {
         <span className="or">
           <div className="center">Or</div>
         </span>
-        <div className="google-btn" onClick={() => googleLogin()}>
-          <div className="google-icon-wrapper">
-            <img
-              className="google-icon"
-              src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-            />
-          </div>
-          <p className="btn-text">
-            <b>Sign in with google</b>
-          </p>
-        </div>
-        <div></div>
+        <GoogleButton onClick={() => googleLogin()} />
         <div className="navgationto">
           <span>Anciens clients ? </span>
           <Link className="link" to={"/connexion"}>

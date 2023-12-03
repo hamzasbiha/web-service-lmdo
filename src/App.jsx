@@ -42,6 +42,8 @@ import VerifyAccounte from "./companent/pages/Profile/VerifyAccounte/VerifyAccou
 import ProdcutLayout from "./companent/pages/Home/ProdcutLayout/ProdcutLayout";
 import Commande from "./companent/pages/Profile/CommandClient/command/Commande";
 import DetailsOrders from "./companent/pages/Profile/CommandClient/command/list-commande/DetailsOrders";
+import NotFound from "./companent/pages/NotFound/NotFound";
+import { SelectTypeAccount } from "./companent/pages/SelectTypeAccount/SelectTypeAccount";
 
 const Layout = () => {
   const alert = useSelector((state) => state.alert.alert);
@@ -67,6 +69,14 @@ function App() {
         {
           path: "/",
           element: <Home />,
+        },
+        {
+          path: "*",
+          element: <NotFound />,
+        },
+        {
+          path: "/type",
+          element: <SelectTypeAccount />,
         },
         {
           path: "/produits/:category",

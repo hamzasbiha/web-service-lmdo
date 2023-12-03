@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import "./Login.scss";
 import { Link, useNavigate } from "react-router-dom";
+import Lottie from "lottie-react";
+import lod from "../../../assets/lottie/catloding.json";
 import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
 import { ToastContainer, toast } from "react-toastify";
-import CircularProgress from "@mui/material/CircularProgress";
+import GoogleButton from "react-google-button";
 import { BaseUrl } from "../../../api/URL";
 import { useTranslation } from "react-i18next";
 
@@ -24,8 +26,8 @@ const Login = () => {
     try {
       const res = await axios.post(`${BaseUrl}/auth/signin`, user);
       sessionStorage.setItem("access", res.data.accesToken);
-      navigation(-1);
       toast.success("Welcome");
+      navigation("/");
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -45,9 +47,9 @@ const Login = () => {
         email: userInfo.data.email,
         accountType: "PERSONAL",
       };
-      const myResponse = await axios.post(`${BaseUrl}/api/auth/google`, user);
+      const myResponse = await axios.post(`${BaseUrl}/auth/google`, user);
       sessionStorage.setItem("access", myResponse.data.accesToken);
-      navigation(-1);
+      navigation("/");
     },
     onError: (errorResponse) => console.log(errorResponse),
   });
@@ -127,29 +129,32 @@ const Login = () => {
           {!Loading ? (
             <button>Connexion</button>
           ) : (
-            <>
-              <CircularProgress
+            <button
+              disabled={Loading}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <div
+                div
                 style={{
-                  position: "absolute",
+                  width: "50px",
+                  height: "50px",
+                  padding: "15px",
+                  alignItems: "center",
+                  filter: "brightness(1.5) saturate(2)",
                 }}
-              />
-              <button disabled={Loading}>Connexion</button>
-            </>
+              >
+                <Lottie animationData={lod} loop={true} />
+              </div>
+            </button>
           )}
           <span className="or">
             <div className="center">Or</div>
           </span>
-          <div className="google-btn" onClick={() => googleLogin()}>
-            <div className="google-icon-wrapper">
-              <img
-                className="google-icon"
-                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-              />
-            </div>
-            <p className="btn-text">
-              <b>Sign in with google</b>
-            </p>
-          </div>
+          <GoogleButton onClick={() => googleLogin()} disabled={Loading} />
           <div className="nav">
             <span>Nouveaux clients ? </span>
             <Link className="link" to={"/creation de compte"}>
