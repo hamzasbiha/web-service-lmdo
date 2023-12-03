@@ -1,0 +1,151 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@438&family=Roboto+Mono:wght@300&display=swap");
+@import "../../../../style/responsive.scss";
+
+.Details {
+  display: flex;
+
+  background-color: #f3f3f3;
+  width: 100%;
+  height: 60vh;
+  padding: 10px;
+  @include sm {
+  }
+  @include md {
+  }
+
+  @include lg {
+    display: flex;
+    height: 70vh;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @include xl {
+    overflow-y: scroll;
+    flex-direction: column;
+
+    padding: 0;
+  }
+  @include xxl {
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+  .col {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    @include xl {
+      max-height: 150px;
+      padding: 50px;
+      gap: 1px;
+    }
+    @include sm {
+      max-height: 40px;
+    }
+    .inforamtion {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      flex-direction: column;
+      background-color: #e9ecef;
+      outline: 1px solid #bcb8b1;
+      border-radius: 5px;
+      font-weight: 600px;
+      padding: 20px;
+      @include md {
+        max-width: 200px;
+      }
+      .top-section {
+        display: flex;
+        align-items: center;
+        span {
+          padding: 7px;
+          transition: all 0.5s ease;
+
+          cursor: pointer;
+          &:hover {
+            background-color: #caffbf;
+            border-radius: 25px;
+            transition: all 0.5s ease;
+            outline: 1px solid #bcb8b1;
+            transform: scale(1.2);
+          }
+          &:active {
+            transform: scale(1);
+          }
+        }
+      }
+      h1 {
+        font-size: 15px;
+        font-weight: 600px;
+      }
+    }
+    .row {
+      flex: 1;
+      display: flex;
+      gap: 10px;
+    }
+  }
+  .col-l {
+    display: flex;
+    flex: 2;
+    @include xl {
+      margin-right: 50px;
+      max-height: 100px;
+      gap: 1px;
+    }
+    @include md {
+      max-width: 60px;
+    }
+    .adresse {
+      display: flex;
+      max-height: 100px;
+      flex-direction: column;
+      text-align: justify;
+      padding: 15px;
+      background-color: #ecf8f8;
+      outline: 1px solid #bcb8b1;
+      border-radius: 5px;
+      flex-wrap: wrap;
+
+      @include xl {
+        max-width: 150px;
+        padding: 50px;
+        gap: 1px;
+      }
+      @include md {
+        max-width: 60px;
+        h1 {
+          display: none;
+        }
+      }
+      .top-section {
+        display: flex;
+        align-items: center;
+        gap: 290px;
+        span {
+          padding: 7px;
+          transition: all 0.5s ease;
+          cursor: pointer;
+          &:hover {
+            background-color: #caffbf;
+            border-radius: 25px;
+            transition: all 0.5s ease;
+            outline: 1px solid #bcb8b1;
+            transform: scale(1.2);
+          }
+          &:active {
+            transform: scale(1);
+          }
+        }
+      }
+      h1 {
+        font-size: 15px;
+      }
+      p {
+        color: gray;
+      }
+    }
+  }
+}

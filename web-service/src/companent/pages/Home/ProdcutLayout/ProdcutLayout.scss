@@ -1,0 +1,32 @@
+@import "../../../../style/responsive.scss";
+.ProdcutLayout {
+  .wrapper {
+    display: flex;
+    .left {
+      flex: 1;
+      @include sm {
+        display: none;
+        padding: 4px;
+      }
+      @include md {
+        display: none;
+        padding: 4px;
+      }
+      @include lg {
+        display: none;
+        padding: 4px;
+      }
+      @include xl {
+        display: none;
+        padding: 4px;
+      }
+      @include xxl {
+        display: none;
+        padding: 4px;
+      }
+    }
+    .right {
+      flex: 4;
+    }
+  }
+}

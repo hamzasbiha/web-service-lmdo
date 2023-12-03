@@ -1,0 +1,11 @@
+@import "./style/responsive.scss";
+$BG:#8ad167;
+$Txt-Color:#f2f2f2;
+* {
+  margin: 0;
+  padding: 0;
+}
+.link {
+  text-decoration: none;
+  color: inherit;
+}

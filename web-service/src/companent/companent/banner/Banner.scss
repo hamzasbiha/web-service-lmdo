@@ -1,0 +1,17 @@
+@import "../../../style/responsive.scss";
+
+.banner {
+  display: flex;
+  align-items: center;
+  background: url("../../../assets/manip/background.png");
+  background-position: center;
+  background-attachment: fixed;
+  @include xxl {
+
+  }
+  img {
+    height: 650px;
+    object-fit: cover;
+    width: 100%;
+  }
+}

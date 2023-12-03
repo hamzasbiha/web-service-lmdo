@@ -1,0 +1,198 @@
+@import "../../../style/responsive.scss";
+
+.navbar-test {
+  position: fixed;
+  background-color: #fff;
+  width: 100%;
+  z-index: 1;
+  @include s {
+  }
+  @include md {
+    h1 {
+      display: none;
+    }
+  }
+
+  @include lg {
+  }
+
+  @include xl {
+  }
+  @include xxl {
+  }
+  .top-nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    .item-top {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      gap: 5px;
+    }
+  }
+  .mobile-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 2;
+    .main-title {
+      display: flex;
+      gap: 3px;
+      cursor: pointer;
+      padding: 10px;
+    }
+    .side-bar-btn {
+      padding: 10px;
+      cursor: pointer;
+      transition: all 0.5s ease;
+      &.rotat {
+        transform: rotate(-90deg);
+        transition: all 0.3s ease;
+      }
+    }
+    .nav-item-link {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      position: fixed;
+      top: 110px;
+      right: -200px;
+      width: 200px;
+      height: 150%;
+      background-color: #fff;
+      transition: all 0.2s ease-out;
+
+      &.stretch-side {
+        width: 45px;
+        p {
+          display: none;
+        }
+        ol {
+          display: none;
+        }
+      }
+      .Stretch {
+        display: flex;
+        align-items: center;
+        left: -9%;
+        top: 2%;
+        background-color: #fff;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        position: absolute;
+        box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+        &.left-abit {
+          left: -30%;
+        }
+        .Icon-strech {
+          font-size: 18px;
+          align-self: center;
+          padding: 5px;
+          cursor: pointer;
+          transition: all 0.5s ease;
+          &.rot {
+            transform: rotate(-180deg);
+            transition: all 0.5s ease;
+            left: 20%;
+          }
+        }
+      }
+      ul {
+        display: flex;
+        margin-top: 25px;
+        flex-direction: column;
+        align-items: start;
+        align-self: flex-start;
+        list-style: none;
+        gap: 10px;
+        font-size: 18px;
+        font-weight: 600px;
+        padding: 16px;
+        li {
+          font-weight: bold;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        .drop-item {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          z-index: 1;
+          transition: opacity 100ms ease, transform 100ms ease;
+          // font-weight: bold;
+          cursor: pointer;
+          .btn-show {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            font-weight: bold;
+          }
+          /* Add this to your existing SCSS file or create a new one */
+          .drop-down-list {
+            opacity: 0;
+            transform: translateY(-50%);
+            transition: opacity 100ms ease, transform 100ms ease;
+            z-index: -1;
+            margin-left: 10px;
+            &.drop-enter-done {
+              opacity: 1;
+              transform: translateY(0);
+              transition: opacity 100ms ease, transform 100ms ease;
+            }
+          }
+          .strectch-list-lang {
+            height: fit-content;
+            padding: 10px;
+            width: 100px;
+            top: 20%;
+            left: 100%;
+            position: absolute;
+            z-index: 1;
+            background-color: #fff;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
+              rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+            border-radius: 5px;
+            transition: all 0.5s ease;
+            &.slide {
+              left: -270%;
+              transition: all 0.5s ease;
+            }
+            &.slide-Acc {
+              left: -270%;
+              top: 15%;
+              transition: all 0.5s ease;
+            }
+            li {
+              &:hover {
+                color: #8ad167;
+              }
+            }
+          }
+          .icon-arrow-drop {
+            font-size: 14px;
+            transition: all 0.3s ease;
+            &.IsDroped {
+              transform: rotate(90deg);
+              transition: all 0.3s ease;
+            }
+            &.IsStrech {
+              transform: rotate(90deg);
+              transition: all 0.3s ease;
+            }
+          }
+        }
+      }
+      &.Show {
+        right: 0;
+        transition: all 0.2s ease-out;
+      }
+    }
+  }
+}

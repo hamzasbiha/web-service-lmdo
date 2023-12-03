@@ -1,0 +1,24 @@
+@import "../../../../style/responsive.scss";
+.cmd {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
+  background-color: #f3f3f3;
+
+  @include sm {
+  }
+  @include md {
+  }
+
+  @include lg {
+  }
+
+  @include xl {
+  }
+
+  @include xxl {
+    height: 50vh;
+    margin-top: 150px;
+  }
+}
