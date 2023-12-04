@@ -12,18 +12,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/client/ClientSlice";
 import { showDrawer } from "../../redux/Alert/AlertSlice";
 import { useTranslation } from "react-i18next";
-import { ToastContainer, toast } from "react-toastify";
-import {
-  Button,
-  Element,
-  Events,
-  animateScroll as scroll,
-  scrollSpy,
-} from "react-scroll";
+import { toast } from "react-toastify";
+import { animateScroll as scroll } from "react-scroll";
 
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import TestNavBar from "./testnav/TestNavBar";
+import MobileNavBar from "./testnav/MobileNavBar";
 
 const Navbars = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -68,17 +62,21 @@ const Navbars = () => {
     }
   };
   window.addEventListener("scroll", trackScroll);
-
   useEffect(() => {
     i18n.changeLanguage(lng);
+
     const handleResize = () => {
       setScreenWidth(window.innerWidth);
     };
+
     // Update screenWidth on component mount and window resize
     setScreenWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
+
+    // Cleanup function to remove event listener when component unmounts
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", trackScroll);
     };
   }, [isScrolling, screenWidth, lng]);
 
@@ -270,7 +268,7 @@ const Navbars = () => {
           <Drawer />
         </div>
       ) : (
-        <TestNavBar />
+        <MobileNavBar />
       )}
     </>
   );

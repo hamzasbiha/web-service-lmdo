@@ -18,6 +18,7 @@ const Drawer = () => {
   const cartlist = useSelector((state) => state.cart.cart);
   const drawer = useSelector((state) => state.alert.showdrawer);
   const token = sessionStorage.getItem("access");
+  console.log(cartlist)
   const navgation = useNavigate();
   const handleDecreaseQuantity = (item) => {
     if (item.QTE > 1) {
@@ -109,11 +110,7 @@ const Drawer = () => {
                       <div
                         className="center"
                         onClick={handleChangetarget}
-                        // onMouseDown={() => setTargetInput(!TargetInput)}
-                        onMouseDown
-                        onMouseUp
-                        onTouchStart
-                        onTouchEnd
+
                       >
                         {!TargetInput ? <>{item.QTE}</> : <input />}
                       </div>

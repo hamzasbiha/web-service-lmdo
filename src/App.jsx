@@ -44,6 +44,7 @@ import Commande from "./companent/pages/Profile/CommandClient/command/Commande";
 import DetailsOrders from "./companent/pages/Profile/CommandClient/command/list-commande/DetailsOrders";
 import NotFound from "./companent/pages/NotFound/NotFound";
 import { SelectTypeAccount } from "./companent/pages/SelectTypeAccount/SelectTypeAccount";
+import CartMobile from "./companent/pages/Cart/CartMobile";
 
 const Layout = () => {
   const alert = useSelector((state) => state.alert.alert);
@@ -75,11 +76,15 @@ function App() {
           element: <NotFound />,
         },
         {
+          path: "/order-mobile",
+          element: <CartMobile />,
+        },
+        {
           path: "/type",
           element: <SelectTypeAccount />,
         },
         {
-          path: "/produits/:category",
+          path: "/produits/:category?",
           element: (
             <Suspense fallback={<h1>Loading...</h1>}>
               <ProdcutLayout />

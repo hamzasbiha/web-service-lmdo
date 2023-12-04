@@ -1,0 +1,37 @@
+.cartItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  justify-content: start;
+  gap: 15px;
+  width: 100%;
+  max-width: 450px;
+  //   Details Section
+  img {
+    height: 150px;
+    mix-blend-mode: multiply;
+    object-fit: cover;
+  }
+  h1 {
+    font-size: 16px;
+    text-align: justify;
+  }
+  .details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  //order Controler
+  .order-contrl {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 5px;
+    padding: 15px;
+    button {
+      background-color: #f2f2f2;
+      border: none;
+      padding: 10px;
+    }
+  }
+}

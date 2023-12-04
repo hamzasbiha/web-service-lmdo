@@ -2,16 +2,99 @@
 
 .banner {
   display: flex;
-  align-items: center;
-  background: url("../../../assets/manip/background.png");
-  background-position: center;
-  background-attachment: fixed;
-  @include xxl {
+  height: 680px;
+  background-color: #f8f7ff;
+  width: 100%;
+  padding: 0;
+  .left-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: start;
+    gap: 30px;
+    flex: 7;
+    margin-left: 150px;
+    position: relative;
+    .lin-an {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      mix-blend-mode: darken;
+    }
+    h1 {
+      font-size: 60px;
+      z-index: 1;
+      &::-moz-selection {
+        /* Code for Firefox */
+        color: #fb8500;
+        background: yellow;
+      }
 
+      &::selection {
+        color: red;
+        background: yellow;
+      }
+    }
+    p {
+      font-size: 18px;
+      font-weight: bold;
+      color: #fb8500;
+      &::-moz-selection {
+        /* Code for Firefox */
+        color: #fb8500;
+        background: yellow;
+      }
+
+      &::selection {
+        color: red;
+        background: yellow;
+      }
+    }
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #ffb627;
+      padding: 15px;
+      border: none;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 15px;
+      width: 150px;
+      color: #f2f2f2;
+      max-height: 50px;
+      .icon-btn {
+        background-color: #f2f2f2;
+        border-radius: 50%;
+        font-size: 13px;
+        padding: 5px;
+        color: gray;
+        margin-top: 3px;
+        &:hover {
+          background-color: #fb8500;
+          cursor: pointer;
+          color: #f2f2f2;
+        }
+      }
+    }
   }
-  img {
-    height: 650px;
-    object-fit: cover;
-    width: 100%;
+  .right-banner {
+    display: flex;
+    flex: 1;
+    background-image: url("../../../assets/manip/shapes.png");
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    .lin-an {
+      position: absolute;
+      mix-blend-mode: darken;
+      height: 450px;
+      width: 200px;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
   }
 }

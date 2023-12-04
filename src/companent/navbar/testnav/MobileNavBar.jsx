@@ -1,13 +1,12 @@
 import { useState } from "react";
-import "./testNavBar.scss";
 import * as Icon from "@mui/icons-material";
 import { CSSTransition } from "react-transition-group";
 import { Link } from "react-router-dom";
 import { animateScroll as scroll } from "react-scroll";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { showDrawer } from "../../../redux/Alert/AlertSlice";
-const TestNavBar = () => {
+import "./MobileNavBar.scss";
+const MobileNavBar = () => {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const token = sessionStorage.getItem("access");
@@ -148,92 +147,48 @@ const TestNavBar = () => {
                 <p> {t("Oiseaux")}</p>
               </li>
             </Link>
+            {!token ? (
+              <Link className="link" to="/Connexion">
+                <li>
+                  <span>
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      height="1em"
+                      width="1em"
+                    >
+                      <path d="M10 17v-3H3v-4h7V7l5 5-5 5m0-15h9a2 2 0 012 2v16a2 2 0 01-2 2h-9a2 2 0 01-2-2v-2h2v2h9V4h-9v2H8V4a2 2 0 012-2z" />
+                    </svg>
+                  </span>
+                  <p> Connexion</p>
+                </li>
+              </Link>
+            ) : (
+              <Link className="link" to={`/profile/{user.id}`}>
+                <li>
+                  <span>
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      height="1em"
+                      width="1em"
+                    >
+                      <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z" />
+                    </svg>
+                  </span>
+                  <p> Profile</p>
+                </li>
+              </Link>
+            )}
             <div className="drop-item">
-              <div className="btn-show" onClick={handleAccountSelection}>
-                <span>
-                  <Icon.Person />
-                </span>
-                <p>Account</p>
-                <span>
-                  <Icon.ArrowForwardIos
-                    className={`icon-arrow-drop ${DropList ? "IsDroped" : ""} `}
-                  />
-                </span>
-              </div>
-              {stretchSide && (
-                <CSSTransition
-                  in={slideListAcc}
-                  timeout={100}
-                  classNames="drop"
-                >
-                  <div
-                    className={`strectch-list-lang ${
-                      slideListAcc ? "slide-Acc" : ""
-                    }`}
-                  >
-                    {!token ? (
-                      <>
-                        <Link className="link" to={"/connexion"}>
-                          <li>Login-in</li>
-                        </Link>
-                        <Link className="link" to={"/creation de compte"}>
-                          <li>Register</li>
-                        </Link>
-                      </>
-                    ) : (
-                      <>
-                        <Link className="link" to={`/profile/${user.id}`}>
-                          <li>Profile</li>
-                        </Link>
-                        <Link className="link" to={"/creation de compte"}>
-                          <li>Log out</li>
-                        </Link>
-                      </>
-                    )}
-                  </div>
-                </CSSTransition>
-              )}
-              <CSSTransition in={DropList} timeout={100} classNames="drop">
-                <>
-                  {!token ? (
-                    <div
-                      className="drop-down-list"
-                      style={{
-                        display: !DropList ? "none" : "",
-                        transition: "all 0.5s ease",
-                      }}
-                    >
-                      <Link className="link">
-                        <ol>Login-in</ol>
-                      </Link>
-                      <Link className="link" to={"/creation de compte"}>
-                        <ol> {t("creation de compte ")}</ol>
-                      </Link>
-                    </div>
-                  ) : (
-                    <div
-                      className="drop-down-list"
-                      style={{
-                        display: !DropList ? "none" : "",
-                        transition: "all 0.5s ease",
-                      }}
-                    >
-                      <Link className="link" to={`/profile/${user.id}`}>
-                        <ol> {t("Compte")}</ol>
-                      </Link>
-                      <span>
-                        <ol>{t("Deconnexion")}</ol>
-                      </span>
-                    </div>
-                  )}
-                </>
-              </CSSTransition>
-              <li onClick={() => dispatch(showDrawer(!drawer))}>
-                <span>
-                  <Icon.ShoppingCart />
-                </span>
-                <p>{t("Pannier")}</p>
-              </li>
+              <Link to={"/order-mobile"} className="link">
+                <li>
+                  <span>
+                    <Icon.ShoppingCart />
+                  </span>
+                  <p>{t("Pannier")}</p>
+                </li>
+              </Link>
               <div className="btn-show" onClick={handleLangSelect}>
                 <span>
                   <Icon.Language />
@@ -279,4 +234,4 @@ const TestNavBar = () => {
   );
 };
 
-export default TestNavBar;
+export default MobileNavBar;

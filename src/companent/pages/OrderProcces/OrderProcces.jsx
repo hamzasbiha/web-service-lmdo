@@ -30,7 +30,7 @@ const OrderProcces = () => {
           if (Object.keys(filed).length !== 0) {
             setCurrentStep(2);
           }
-          
+
           break;
         default:
           break;
@@ -38,7 +38,6 @@ const OrderProcces = () => {
     };
     validet();
   }, [currentStep]);
-
 
   return (
     <div className="order">

@@ -1,0 +1,54 @@
+.mobile-cart {
+  height: 100%;
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 150px;
+    width: 100%;
+    padding: 5px;
+
+    .list-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 15px;
+      align-items: center; /* Align items to the center */
+      padding: 15px;
+      .summary {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+        width: 100%;
+        margin-left: 155px;
+        .row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          gap: 20px;
+          span {
+            font-size: 1.2em;
+            /* Add space between key and value */
+            width: 100%; /* Ensure full width */
+          }
+        }
+
+        button {
+          padding: 10px 15px;
+          background-color: #16cc9b;
+          color: #ffffff;
+          border: none;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          &:hover {
+            background-color: #f58551;
+          }
+        }
+      }
+    }
+  }
+}

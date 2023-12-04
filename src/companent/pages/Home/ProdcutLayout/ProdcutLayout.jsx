@@ -6,22 +6,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProdcuts } from "../../../../redux/products/productSlice";
 import { useParams } from "react-router-dom";
 import PagniteBottom from "./BottomPagnite/pagniteBottom";
+
 const ProdcutLayout = () => {
   const dispatch = useDispatch();
+  const catgo = useParams();
+  const data = useSelector((state) => state.product.Product);
+  const loading = useSelector((state) => state.product.loading);
+  const [filteredData, setFilteredData] = useState(data);
+  const [sortedData, setSortedData] = useState([]);
   const [pages, setPages] = useState({});
   const [currentPages, setCurrentPage] = useState(1);
-  const data = useSelector((state) => state.product.Product);
-  const [filteredData, setFilteredData] = useState(data);
-  const [sortedData, setSortedData] = useState([]); // Initialize with the initial data
-  const catgo = useParams();
-  const filter = {
-    category: catgo.category,
-  };
-  useEffect(() => {
-    dispatch(fetchProdcuts(filter));
-    handleFilterChange();
-  }, [catgo, pages]);
 
+  useEffect(() => {
+    const filter = {
+      category: catgo.category,
+    };
+
+    dispatch(fetchProdcuts(filter));
+    handleFilterChange(); // Initial filter
+
+    // Include handleFilterChange as a dependency to avoid warnings
+  }, [catgo.category, loading]);
   const handleFilterChange = (selecFilt) => {
     const filt = data.filter(
       (item) =>
@@ -29,7 +34,6 @@ const ProdcutLayout = () => {
     );
     setFilteredData(filt);
   };
-  console.log(data);
   return (
     <div className="ProdcutLayout">
       <div className="wrapper">
