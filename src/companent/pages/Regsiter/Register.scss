@@ -43,6 +43,9 @@ $button-active-blue: #1669f2;
     h1 {
       letter-spacing: 5px;
       font-size: 55px;
+      @include sm {
+        font-size: 30px;
+      }
     }
     .row {
       display: flex;
@@ -81,8 +84,11 @@ $button-active-blue: #1669f2;
         flex-direction: column;
         text-align: center;
         position: relative;
-        width: 280px;
+        max-width: 280px;
         gap: 15px;
+        @include sm {
+          align-items: center;
+        }
         input {
           border: 1px solid rgba(107, 77, 77, 0.25);
           outline: none;
@@ -91,6 +97,9 @@ $button-active-blue: #1669f2;
           padding: 10px;
           background-color: #ced4da;
           font-size: 1em;
+          @include sm {
+            max-width: 200px;
+          }
         }
 
         span {
@@ -106,8 +115,9 @@ $button-active-blue: #1669f2;
     .inputitemCheckbox {
       display: flex;
       align-items: start;
+      text-align: center;
       gap: 2px;
-      margin-right: 135px;
+      margin-right: 65px;
     }
     .or {
       width: 430px;
@@ -123,44 +133,6 @@ $button-active-blue: #1669f2;
         top: -10px;
         margin-left: 189px;
         padding: 0 10px 0px 10px;
-      }
-    }
-    .google-btn {
-      width: 184px;
-      height: 42px;
-      background-color: $google-blue;
-      border-radius: 2px;
-      box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
-      width: 52%;
-      cursor: pointer;
-      .google-icon-wrapper {
-        position: absolute;
-        margin-top: 1px;
-        margin-left: 1px;
-        width: 40px;
-        height: 40px;
-        border-radius: 2px;
-        background-color: $white;
-      }
-      .google-icon {
-        position: absolute;
-        margin-top: 11px;
-        margin-left: 11px;
-        width: 18px;
-        height: 18px;
-      }
-      .btn-text {
-        float: right;
-        margin: 11px 11px 0 0;
-        color: $white;
-        font-size: 14px;
-        letter-spacing: 0.2px;
-      }
-      &:hover {
-        box-shadow: 0 0 6px $google-blue;
-      }
-      &:active {
-        background: $button-active-blue;
       }
     }
     .radio {
@@ -200,6 +172,9 @@ $button-active-blue: #1669f2;
       font-weight: bold;
       text-align: justify;
       color: rgb(0, 0, 0);
+      @include sm {
+        max-width: 200px;
+      }
       .linkpage {
         color: #3f612d;
       }

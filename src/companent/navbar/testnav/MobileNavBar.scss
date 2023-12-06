@@ -32,11 +32,15 @@
       padding: 10px;
       gap: 5px;
     }
+    @include xxl {
+      display: none;
+    }
   }
   .mobile-nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    min-height: 70px;
     z-index: 2;
     .main-title {
       display: flex;
@@ -59,12 +63,12 @@
       align-items: flex-start;
       justify-content: flex-start;
       position: fixed;
-      top: 110px;
-      right: -200px;
-      width: 200px;
+      top: 50px;
+      right: -100%;
+      width: 100%;
       height: 150%;
       background-color: #fff;
-      transition: all 0.2s ease-out;
+      transition: all 0.4s ease;
 
       &.stretch-side {
         width: 45px;
@@ -191,7 +195,7 @@
       }
       &.Show {
         right: 0;
-        transition: all 0.2s ease-out;
+        transition: all 0.4s ease;
       }
     }
   }

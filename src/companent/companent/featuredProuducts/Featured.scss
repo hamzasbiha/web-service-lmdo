@@ -7,6 +7,10 @@
   justify-content: center;
   flex-direction: column;
   width: auto;
+  @include sm {
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
   h1 {
     font-size: 45px;
     text-align: start;
@@ -16,6 +20,9 @@
     }
     &:hover {
       color: #343a40;
+    }
+    @include sm {
+      font-size: 30px;
     }
   }
   .wrapper {
@@ -28,8 +35,11 @@
     height: 500px;
     padding: 20px;
     .center {
-      @include xxl {
-        overflow-x: scroll;
+      // @include xxl {
+      //   overflow-x: scroll;
+      // }
+      @include sm {
+        overflow-y: hidden;
       }
       display: flex;
       align-items: center;

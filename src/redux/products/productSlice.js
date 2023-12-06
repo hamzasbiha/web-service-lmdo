@@ -35,7 +35,6 @@ export const addProductApi = createAsyncThunk(
 export const deleteProduct = createAsyncThunk(
   "product/delete",
   async ({ token, id }) => {
-
     const res = await axios.delete(`${BaseUrl}/products/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });

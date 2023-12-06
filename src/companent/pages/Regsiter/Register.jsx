@@ -8,7 +8,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import { BaseUrl } from "../../../api/URL";
+import { BaseUrl, localUrl } from "../../../api/URL";
 const Register = () => {
   const navgation = useNavigate();
   const [accounteTypes, setAccounteTypes] = useState("");
@@ -60,15 +60,17 @@ const Register = () => {
         "https://www.googleapis.com/oauth2/v3/userinfo",
         { headers: { Authorization: `Bearer ${tokenResponse.access_token}` } }
       );
-      console.log(userInfo.data.name);
       const user = {
         fullname: userInfo.data.name,
         email: userInfo.data.email,
         accountType: "Personal",
       };
-      // const myResponse = await axios.post(`${BaseUrl}/api/auth/google`, user);
-      // sessionStorage.setItem("access", myResponse.data.accesToken);
-      navigation("/type");
+      const myResponse = await axios.post(`${localUrl}/auth/google`, user);
+      sessionStorage.setItem("access", myResponse.data.accesToken);
+     let isNew = myResponse.data.isNew;
+      console.log(isNew)
+      !isNew ? navgation("/") : navgation("/type");
+      // navigation("/type");
     },
     onError: (errorResponse) => console.log(errorResponse),
   });
@@ -148,6 +150,7 @@ const Register = () => {
               Password
             </span>
             <input
+              autoComplete="current-password"
               type={!showPassword ? `password` : "text"}
               name="password"
               onFocus={() => setPassword(true)}

@@ -3,7 +3,7 @@ import axios from "axios";
 import { BaseUrl } from "../api/URL";
 
 export const addCartApi = createAsyncThunk("cart", async ({ info, token }) => {
-  console.log(info);
+
   const res = await axios.post(`${BaseUrl}/cart/create`, info, {
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -14,7 +14,6 @@ export const fetchallcart = createAsyncThunk("carts", async (token) => {
   const res = await axios.get(`${BaseUrl}/cart/carts`, {
     headers: { Authorization: `Bearer ${token}` },
   });
-  console.log(res.data);
   return res.data;
 });
 export const fetchOrderClient = createAsyncThunk(
@@ -80,7 +79,6 @@ export const CartSlice = createSlice({
           console.log("Stock is limited for this item");
         }
       } else {
-        console.log(action.payload)
         state.cart?.push(action.payload);
       }
     },
@@ -127,7 +125,6 @@ export const CartSlice = createSlice({
         state.error = false;
       })
       .addCase(fetchallcart.fulfilled, (state, action) => {
-        console.log(state.orders);
         state.pending = false;
         state.orders = action.payload;
       })

@@ -45,6 +45,7 @@ import DetailsOrders from "./companent/pages/Profile/CommandClient/command/list-
 import NotFound from "./companent/pages/NotFound/NotFound";
 import { SelectTypeAccount } from "./companent/pages/SelectTypeAccount/SelectTypeAccount";
 import CartMobile from "./companent/pages/Cart/CartMobile";
+import SocietyForm from "./companent/pages/SelectTypeAccount/SocietyForm/SocietyForm";
 
 const Layout = () => {
   const alert = useSelector((state) => state.alert.alert);
@@ -84,19 +85,19 @@ function App() {
           element: <SelectTypeAccount />,
         },
         {
+          path:"/society",
+          element:<SocietyForm/>
+        },
+        {
           path: "/produits/:category?",
           element: (
-            <Suspense fallback={<h1>Loading...</h1>}>
               <ProdcutLayout />
-            </Suspense>
           ),
         },
         {
           path: "/produit/:id",
           element: (
-            <Suspense fallback={<h1>Loading...</h1>}>
               <Product />
-            </Suspense>
           ),
         },
         {

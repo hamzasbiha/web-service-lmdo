@@ -1,3 +1,6 @@
+@import "../../../style/responsive.scss";
+@include xxl {
+}
 .add {
   width: 100%;
   display: flex;
@@ -66,8 +69,21 @@
               border: none;
               border-bottom: 1px solid gray;
               background-color: #f5f5f5;
-              &:focus+label {
+              &:focus + label {
                 font-weight: bold;
+              }
+            }
+            textarea {
+              outline: none;
+              resize: none;
+              padding: 5px;
+              border: none;
+              max-width: 100%;
+              // min-width: 395px;
+              border-bottom: 1px solid gray;
+              background-color: #f5f5f5;
+              @include xxl {
+                max-width: 100%;
               }
             }
           }

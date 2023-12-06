@@ -2,10 +2,22 @@
 
 .banner {
   display: flex;
-  height: 680px;
+  max-height: 680px;
   background-color: #f8f7ff;
-  width: 100%;
+  max-width: 100%;
   padding: 0;
+  @include s {
+    padding: 15px;
+    margin-bottom: 20px;
+    text-align: start;
+  align-items: center;
+  }
+  @include sm {
+    padding: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+    align-items: center;
+  }
   .left-banner {
     display: flex;
     align-items: center;
@@ -16,6 +28,14 @@
     flex: 7;
     margin-left: 150px;
     position: relative;
+    @include s {
+      align-items: start;
+      text-align: start;
+    }
+    @include sm {
+      align-items: start;
+      text-align: start;
+    }
     .lin-an {
       position: absolute;
       top: 0;
@@ -26,6 +46,9 @@
     h1 {
       font-size: 60px;
       z-index: 1;
+      @include xxl {
+        font-size: 40px;
+      }
       &::-moz-selection {
         /* Code for Firefox */
         color: #fb8500;
@@ -87,6 +110,16 @@
     background-position: center;
     background-size: cover;
     position: relative;
+    @include s {
+      display: none;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    @include sm {
+      display: none;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
     .lin-an {
       position: absolute;
       mix-blend-mode: darken;

@@ -18,7 +18,6 @@ const Drawer = () => {
   const cartlist = useSelector((state) => state.cart.cart);
   const drawer = useSelector((state) => state.alert.showdrawer);
   const token = sessionStorage.getItem("access");
-  console.log(cartlist)
   const navgation = useNavigate();
   const handleDecreaseQuantity = (item) => {
     if (item.QTE > 1) {
@@ -31,7 +30,6 @@ const Drawer = () => {
     }
   };
   const handleIncreaseQuantity = (item) => {
-    console.log(item.QTE);
     if (item.QTE < item.stock) {
       dispatch(
         updateCartItemQuantity({
@@ -62,7 +60,7 @@ const Drawer = () => {
     }
   };
   const handleChangetarget = (e) => {
-    console.log("target type touch start");
+    return;
   };
   return (
     <div className={`drawer ${drawer && "open"}`}>
@@ -107,11 +105,7 @@ const Drawer = () => {
                       >
                         -
                       </div>
-                      <div
-                        className="center"
-                        onClick={handleChangetarget}
-
-                      >
+                      <div className="center" onClick={handleChangetarget}>
                         {!TargetInput ? <>{item.QTE}</> : <input />}
                       </div>
                       <div

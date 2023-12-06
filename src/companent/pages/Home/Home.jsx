@@ -23,16 +23,16 @@ const Home = () => {
     }
   }, [token]);
   return (
-    <>
+    <div className="home">
       <Banner />
       <ToastContainer />
       <FeaturedProducts type={"new"} />
-      <GridLayoutFilter />
+      {/* <GridLayoutFilter /> */}
       <ProdcutLayout />
       <Announcement />
       <FeaturedProducts type={"trending"} />
       <MapStore />
-    </>
+    </div>
   );
 };
 

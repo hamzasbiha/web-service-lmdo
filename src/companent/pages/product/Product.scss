@@ -4,6 +4,34 @@
   padding: 20px 30px;
   display: flex;
   gap: 50px;
+  @include s {
+    padding: 10px;
+    max-width: 200px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    .right h1,
+    span {
+      font-size: 14px;
+      text-align: center;
+    }
+    .right .brand span {
+      font-size: 14px;
+      display: flex;
+      margin-left: 25px;
+      text-align: center;
+    }
+    .right .add-cart-dec button,
+    span,
+    .btn-add {
+      font-size: 10px;
+      font-weight: 200px;
+      max-height: 40px;
+      // max-width: 100px;
+      align-items: center;
+      padding: 0px;
+    }
+  }
   @include md {
     flex-direction: column;
   }
@@ -30,14 +58,23 @@
     }
     .images {
       flex: 1;
+
+      @include s {
+        align-items: center;
+        justify-content: center;
+        margin-left: 100px;
+      }
       img {
         width: 100%;
         max-width: 150px;
         height: 150px;
         object-fit: cover;
         cursor: pointer;
+        @include s {
+          height: 50px;
+        }
         @include xl {
-          width: 100px;
+          width: 50px;
         }
         @include sm {
           width: 50px;
@@ -49,11 +86,17 @@
       flex: 5;
       @include xl {
         min-width: 400px;
+        margin-left: -100px;
       }
+
       img {
         width: 100%;
         max-height: 800px;
         object-fit: cover;
+        @include s {
+          max-width: 300px;
+          margin-left: 100px;
+        }
       }
     }
   }
@@ -89,7 +132,12 @@
     .add-cart-dec {
       display: flex;
       align-items: center;
+      text-align: center;
       gap: 10px;
+      @include s {
+        font-size: 12px;
+        padding: 12px;
+      }
       span {
         font-size: 18px;
         font-weight: bold;
@@ -116,6 +164,10 @@
         width: 100%;
         max-width: 200px;
         border-radius: 5px;
+        @include s {
+          font-size: 12px;
+          padding: 12px;
+        }
       }
     }
     .add-cart {

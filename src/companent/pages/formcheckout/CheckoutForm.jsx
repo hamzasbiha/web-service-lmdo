@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import "./checkout.scss";
 import * as Icon from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
-import { addCartApi } from "../../../redux/cartSlice";
 import { Link } from "react-router-dom";
-import FeaturedProducts from "../../companent/featuredProuducts/FeaturedProducts";
 const CheckoutForm = ({
   filed,
   setFiled,
@@ -23,7 +21,6 @@ const CheckoutForm = ({
     setFiled({ userInformation });
     setCurrentStep(2);
   };
-  console.log(cartitems);
   return (
     <div>
       <div className="content">

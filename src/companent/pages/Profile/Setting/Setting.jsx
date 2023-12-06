@@ -8,43 +8,36 @@ import Select from "@mui/material/Select";
 import { updateUser } from "../../../../redux/client/ClientSlice";
 const Setting = () => {
   const dispatch = useDispatch();
-  const [accType, setAccType] = useState(null);
+  const [accType, setAccType] = useState("");
   const user = useSelector((state) => state.user.user);
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     let updateduser = Object.fromEntries(formData);
-
-    const userUpd = { ...updateduser, accountType: accType };
+    console.log(accType)
+    const userUpd = {
+      ...updateduser,
+      accountType: accType,
+    };
     let token = sessionStorage.getItem("access");
+    console.log(userUpd);
     dispatch(updateUser({ token: token, user: userUpd }));
   };
-  console.log(accType);
   const handleChange = (event) => {
     setAccType(event.target.value);
   };
-  console.log(user);
   return (
     <div className="setting">
       <h1>Gere vtore compte</h1>
       <form onSubmit={handleSubmit}>
         <div className="col">
           <div className="row">
-            <label>Nom</label>
+            <label>FullName</label>
             <input
               type="text"
-              id="firstname"
-              name="firstname"
-              defaultValue={user.firstname}
-            />
-          </div>
-          <div className="row">
-            <label>Prénom</label>
-            <input
-              type="text"
-              id="lastname"
-              name="lastname"
-              defaultValue={user.lastname}
+              id="fullname"
+              name="fullname"
+              defaultValue={user.fullname}
             />
           </div>
           <div className="row">
@@ -76,9 +69,11 @@ const Setting = () => {
             id="demo-simple-select-standard"
             label="Age"
             onChange={handleChange}
+            value={accType} // Use the accType state as the value
+            defaultValue={user.accountType}
           >
-            <MenuItem value={"PERSONAL"}>Personal</MenuItem>
-            <MenuItem value={"SOCIETY"}>company</MenuItem>
+            <MenuItem value={"Personal"}>Personal</MenuItem>
+            <MenuItem value={"Society"}>company</MenuItem>
           </Select>
         </FormControl>
         <div className="btn">

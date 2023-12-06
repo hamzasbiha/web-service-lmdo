@@ -1,5 +1,9 @@
 .modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: aliceblue;
+  gap: 45px;
   height: 550px;
   width: 650px;
   border-radius: 15px;

@@ -7,9 +7,11 @@ import { useNavigate } from "react-router-dom";
 const DeleteAcount = () => {
   const [pass, setPass] = useState("");
   const token = sessionStorage.getItem("access");
+
   const dispatch = useDispatch();
   const navgation = useNavigate();
   const handledeleteAccounte = () => {
+    console.log(token);
     dispatch(deleteAccoute({ token: token, password: pass })).then((action) => {
       if (action.type === "deleteAccount/fulfilled") {
         navgation("/");

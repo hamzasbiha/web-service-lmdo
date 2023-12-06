@@ -20,7 +20,6 @@ const CartItem = ({ item }) => {
     }
   };
   const handleIncreaseQuantity = (item) => {
-    console.log(item.QTE);
     if (item.QTE < item.stock) {
       dispatch(
         updateCartItemQuantity({
@@ -36,7 +35,6 @@ const CartItem = ({ item }) => {
   const handleChangetarget = (e) => {
     console.log("target type touch start");
   };
-  console.log(item);
   return (
     <div className="cartItem">
       <img alt="item-img" src={item.images[0]} />

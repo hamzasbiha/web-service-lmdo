@@ -24,7 +24,7 @@ const style = {
   p: 4,
 };
 const ProductLIstSells = () => {
-  const access = sessionStorage.getItem("access");
+  const token = sessionStorage.getItem("access");
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -36,7 +36,7 @@ const ProductLIstSells = () => {
     category: catgo.category,
   };
   useEffect(() => {
-    disptach(fetchclient(access));
+    disptach(fetchclient(token));
     disptach(fetchProdcuts(filters)).then((action) => {
       if (fetchProdcuts.fulfilled.match(action)) {
         // The action was successful
@@ -46,7 +46,7 @@ const ProductLIstSells = () => {
         console.log("Error fetching products:", action.error.message);
       }
     });
-  }, [disptach, access,loding]);
+  }, [disptach, token,loding]);
 
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
@@ -151,7 +151,8 @@ const ProductLIstSells = () => {
   ];
   const handleDeleteProduct = (id) => {
     // Dispatch the deleteProduct action
-    disptach(deleteProduct({ token: access, id }));
+    disptach(deleteProduct({ token: token, id }));
+    console.log(id)
     disptach(fetchProdcuts(filters));
     handleClose();
   };

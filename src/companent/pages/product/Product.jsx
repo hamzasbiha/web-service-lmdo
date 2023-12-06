@@ -135,7 +135,7 @@ const Product = () => {
         </div>
         <div className="right">
           <h1>{selectedProduct.title}</h1>
-          <div>
+          <div className="brand">
             <span>
               Brands:<span className="item">{selectedProduct.market}</span>
             </span>

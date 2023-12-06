@@ -7,7 +7,7 @@ import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
 import { ToastContainer, toast } from "react-toastify";
 import GoogleButton from "react-google-button";
-import { BaseUrl } from "../../../api/URL";
+import { BaseUrl,localUrl } from "../../../api/URL";
 import { useTranslation } from "react-i18next";
 
 const Login = () => {
@@ -45,10 +45,11 @@ const Login = () => {
       const user = {
         fullname: userInfo.data.name,
         email: userInfo.data.email,
-        accountType: "PERSONAL",
+        accountType: "Personal",
       };
-      const myResponse = await axios.post(`${BaseUrl}/auth/google`, user);
-      sessionStorage.setItem("access", myResponse.data.accesToken);
+      const myResponse = await axios.post(`${localUrl}/auth/google`, user);
+     
+      sessionStorage.setItem("access", myResponse.data.token.accesToken);
       navigation("/");
     },
     onError: (errorResponse) => console.log(errorResponse),
@@ -79,6 +80,7 @@ const Login = () => {
                 Email
               </span>
               <input
+              autoComplete="username"
                 type="email"
                 name="email"
                 onChange={(e) =>
@@ -106,6 +108,7 @@ const Login = () => {
                 {t("Pass")}
               </span>
               <input
+                 autoComplete="current-password"
                 type={showPassword ? "text" : "password"}
                 name="password"
                 onFocus={() => setPasswordFocus(true)}

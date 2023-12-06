@@ -144,7 +144,7 @@ const AddingNewProdcut = () => {
             <form onSubmit={handleSubmit}>
               <div className="formInput">
                 <label htmlFor="file">
-                  Image : <DriveFolderUpload className="icon" />
+                  Upload : <DriveFolderUpload className="icon" />
                 </label>
                 <input
                   type="file"
@@ -163,7 +163,13 @@ const AddingNewProdcut = () => {
               </div>
               <div className="formInput">
                 <label>description</label>
-                <input type="text" id="content" name="content" />
+                <textarea
+                  rows="5"
+                  cols="33"
+                  type="text"
+                  id="content"
+                  name="content"
+                />
               </div>
               <div className="formInput">
                 <label>Market</label>
