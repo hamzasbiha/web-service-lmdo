@@ -35,9 +35,6 @@ import Delivery from "./companent/ADMIN/Delivery/Delivery";
 import UpdateAdminProfile from "./companent/ADMIN/setting/updateProfile/updateAdminProfile";
 import UpdateAdminPAssword from "./companent/ADMIN/setting/UpdatePassword/updateAdminPAssword";
 import { ModifyProduct } from "./companent/ADMIN/edit-product/ModifyProduct";
-import "./theme/dark.scss";
-import "./App.scss";
-import { SkeletonTheme } from "react-loading-skeleton";
 import VerifyAccounte from "./companent/pages/Profile/VerifyAccounte/VerifyAccounte";
 import ProdcutLayout from "./companent/pages/Home/ProdcutLayout/ProdcutLayout";
 import Commande from "./companent/pages/Profile/CommandClient/command/Commande";
@@ -46,6 +43,8 @@ import NotFound from "./companent/pages/NotFound/NotFound";
 import { SelectTypeAccount } from "./companent/pages/SelectTypeAccount/SelectTypeAccount";
 import CartMobile from "./companent/pages/Cart/CartMobile";
 import SocietyForm from "./companent/pages/SelectTypeAccount/SocietyForm/SocietyForm";
+import "./theme/dark.scss";
+import "./App.scss";
 
 const Layout = () => {
   const alert = useSelector((state) => state.alert.alert);
@@ -238,11 +237,10 @@ function App() {
     },
   ]);
   return (
-    <SkeletonTheme baseColor="#202020" highlightColor="#444">
       <GoogleOAuthProvider clientId="648490929847-l0v62v1c3fus1k7id2c7ug20tr6rt28m.apps.googleusercontent.com">
         <RouterProvider router={router} />
       </GoogleOAuthProvider>
-    </SkeletonTheme>
+
   );
 }
 
