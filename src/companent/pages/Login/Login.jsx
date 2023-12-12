@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.scss";
 import { Link, useNavigate } from "react-router-dom";
-import Lottie from "lottie-react";
-import lod from "../../../assets/lottie/catloding.json";
+import CircularProgress from "@mui/material/CircularProgress/CircularProgress";
 import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
 import { ToastContainer, toast } from "react-toastify";
 import GoogleButton from "react-google-button";
-import { BaseUrl,localUrl } from "../../../api/URL";
+import { BaseUrl, localUrl } from "../../../api/URL";
 import { useTranslation } from "react-i18next";
+import { animateScroll } from "react-scroll";
 
 const Login = () => {
   const { t, i118n } = useTranslation();
@@ -17,7 +17,20 @@ const Login = () => {
   const [emailfocused, setEmailFocused] = useState(false);
   const [Loading, setLoading] = useState(false);
   const [passwordFocus, setPasswordFocus] = useState(false);
+  const [isMouted, setIsMouted] = useState(false);
   const navigation = useNavigate();
+  const options = {
+    // your options here, for example:
+    duration: 1000,
+    smooth: true,
+  };
+  useEffect(() => {
+    if (!isMouted) {
+      animateScroll.scrollToTop(options);
+      setIsMouted(false);
+    }
+  }, [isMouted]);
+
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -47,8 +60,8 @@ const Login = () => {
         email: userInfo.data.email,
         accountType: "Personal",
       };
-      const myResponse = await axios.post(`${localUrl}/auth/google`, user);
-     
+      const myResponse = await axios.post(`${BaseUrl}/auth/google`, user);
+
       sessionStorage.setItem("access", myResponse.data.token.accesToken);
       navigation("/");
     },
@@ -80,7 +93,7 @@ const Login = () => {
                 Email
               </span>
               <input
-              autoComplete="username"
+                autoComplete="username"
                 type="email"
                 name="email"
                 onChange={(e) =>
@@ -108,7 +121,7 @@ const Login = () => {
                 {t("Pass")}
               </span>
               <input
-                 autoComplete="current-password"
+                autoComplete="current-password"
                 type={showPassword ? "text" : "password"}
                 name="password"
                 onFocus={() => setPasswordFocus(true)}
@@ -141,16 +154,12 @@ const Login = () => {
               }}
             >
               <div
-                div
                 style={{
-                  width: "50px",
-                  height: "50px",
-                  padding: "15px",
-                  alignItems: "center",
-                  filter: "brightness(1.5) saturate(2)",
+                  display: "flex",
+                  alignSelf: "center",
                 }}
               >
-                <Lottie animationData={lod} loop={true} />
+                <CircularProgress className="prog-circl" />
               </div>
             </button>
           )}

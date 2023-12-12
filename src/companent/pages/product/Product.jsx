@@ -73,7 +73,7 @@ const Product = () => {
       }
     }
   };
-  console.log(windowWidth > 1900);
+  console.log(user);
   return (
     <>
       <div className="product">
@@ -89,6 +89,7 @@ const Product = () => {
                           alt="list-img"
                           src={item}
                           onClick={() => setSelectedImage(index)}
+                          loading="lazy"
                         />
                       </React.Fragment>
                     );
@@ -99,7 +100,7 @@ const Product = () => {
               </div>
               <div className="main-img">
                 {ImageLoad ? (
-                  <img alt="" src={selectedProduct.images[selecteImage]} />
+                  <img alt="" src={selectedProduct.images[selecteImage]} loading="lazy" />
                 ) : (
                   <Lottie
                     animationData={animation1}
@@ -141,9 +142,22 @@ const Product = () => {
             </span>
           </div>
           <span>
-            <span className="item-price ">
+            {user.accountType === "Society" && <span className="item-price ">
+              {selectedProduct.priceForCompany}TND
+            </span>}
+            {!user || user.accountType === "Personal" && <span className="item-price ">
               {selectedProduct.priceForPersonal}TND
-            </span>
+            </span>}
+            {user.accountType === "Admin" && <div style={{
+              display: "flex",
+              flexDirection: "column",
+              gap:"10px"
+            }}><span className="item-price ">
+                {selectedProduct.priceForPersonal}TND
+              </span>
+              <span className="item-price ">
+                {selectedProduct.priceForCompany}TND
+              </span></div>}
           </span>
           <span>
             quantity : <span className="item">{selectedProduct.quantity}</span>

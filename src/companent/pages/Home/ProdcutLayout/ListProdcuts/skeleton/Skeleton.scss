@@ -1,0 +1,83 @@
+.card-sk {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  //   background-color: gray;
+  animation: skeleton 1s ease infinite alternate;
+  height: 100%;
+  gap: 10px;
+  @keyframes skeleton {
+    to {
+      opacity: 0.5;
+    }
+  }
+  cursor: pointer;
+  .item-sk-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    .image-sk {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      .img-sk {
+        height: 250px;
+        width: 250px;
+        background-color: yellow;
+      }
+    }
+  }
+  .content-sk {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 200px;
+    width: 220px;
+    background-color: rgb(156, 154, 154);
+    border-radius: 3px;
+  }
+  .title-sk {
+    height: 10px;
+    background-color: gray;
+    width: 100%;
+    border-radius: 3px;
+  }
+}
+.item-list-sk {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  flex-direction: column;
+  justify-content: start;
+  height: 250px;
+  animation: skeleton 1s ease infinite alternate;
+  width: 100%;
+  position: relative;
+  gap: 5px;
+  @keyframes skeleton {
+    to {
+      opacity: 0.5;
+    }
+  }
+  .item-top-sk {
+    height: 180px;
+    width: 100%;
+    background-color: gray;
+    border-radius: 5px;
+  }
+  .title-sk {
+    height: 15px;
+    width: 100%;
+    background-color: gray;
+    border-radius: 10px;
+  }
+  .price-sk {
+    height: 10px;
+    width: 70%;
+    background-color: gray;
+    border-radius: 5px;
+  }
+}

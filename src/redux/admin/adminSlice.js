@@ -8,7 +8,15 @@ export const fetchclient = createAsyncThunk("admin", async (token) => {
   });
   return res.data;
 });
-
+export const requestClient = createAsyncThunk(
+  "admin/req-handl",
+  async (request, token) => {
+    const res = await axios.post(`${BaseUrl}/users/Request-user`, request, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.data;
+  }
+);
 export const adminSlice = createSlice({
   name: "admin",
   initialState: {
@@ -28,6 +36,18 @@ export const adminSlice = createSlice({
         state.clients = action.payload;
       })
       .addCase(fetchclient.rejected, (state) => {
+        state.pending = false;
+        state.error = true;
+      })
+      .addCase(requestClient.pending, (state) => {
+        state.pending = true;
+        state.error = false;
+      })
+      .addCase(requestClient.fulfilled, (state) => {
+        state.pending = false;
+        state.error = false;
+      })
+      .addCase(requestClient.rejected, (state) => {
         state.pending = false;
         state.error = true;
       });

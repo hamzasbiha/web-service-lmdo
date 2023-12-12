@@ -11,6 +11,7 @@ import ProdcutLayout from "./ProdcutLayout/ProdcutLayout";
 import MapStore from "../../Map/MapStore";
 import { ToastContainer } from "react-toastify";
 import GridLayoutFilter from "../../companent/GridLayoutFilter/GridLayoutFilter";
+import { fetchProdcuts } from "../../../redux/products/productSlice";
 const Home = () => {
   const dispatch = useDispatch();
   let token = sessionStorage.getItem("access");
@@ -20,6 +21,7 @@ const Home = () => {
     if (token) {
       dispatch(fetchUserApi(token));
       dispatch(fetchSingleCart({ id: user.id, token: token }));
+      dispatch(fetchProdcuts())
     }
   }, [token]);
   return (

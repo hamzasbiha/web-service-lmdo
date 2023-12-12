@@ -1,0 +1,64 @@
+.society-form {
+  .input-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 25px;
+    .doub-input-item {
+      display: flex;
+      max-width: 200px;
+      justify-content: space-between;
+      width: 100%;
+      .inputitem {
+        width: 50px;
+        &.type-file {
+          width: 150px;
+        }
+      }
+      // gap: 15px;
+    }
+    .inputitem {
+      display: flex;
+      align-items: start;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      position: relative;
+      gap: 15px;
+      &.file {
+        max-width: 220px;
+      }
+      input {
+        border: 1px solid rgba(107, 77, 77, 0.25);
+        outline: none;
+        border-radius: 10px;
+        width: 100%;
+        padding: 10px;
+        background-color: #ced4da;
+        font-size: 1em;
+      }
+      span {
+        position: absolute;
+        left: 0;
+        padding: 10px;
+        pointer-events: none;
+        font-size: 1em;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+.close-btn {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: flex-end;
+  cursor: pointer;
+  span {
+    background-color: #ced4da;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+  }
+}

@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Navbars from "./companent/navbar/Navbars";
 import Footer from "./companent/footer/Footer";
@@ -23,7 +23,6 @@ import Bubble from "./companent/companent/bubble/Bubble";
 import ForgetPassword from "./companent/pages/forgetPassword/ForgetPassword";
 import ForgetProcess from "./companent/pages/Login/forgetPass/ForgetProcess";
 import EditAdresse from "./companent/pages/Profile/DefaultAdresse/Editadresse/EditAdresse";
-import { useSelector } from "react-redux";
 import ProfileAdmin from "./companent/ADMIN/profile/ProfileAdmin";
 import Clientlist from "./companent/ADMIN/clients/Client-list";
 import SettingAd from "./companent/ADMIN/setting/SettingAd";
@@ -47,8 +46,6 @@ import "./theme/dark.scss";
 import "./App.scss";
 
 const Layout = () => {
-  const alert = useSelector((state) => state.alert.alert);
-  const mode = window.matchMedia;
   return (
     <div className={false ? `App dark` : "App"}>
       <Navbars />
@@ -84,20 +81,16 @@ function App() {
           element: <SelectTypeAccount />,
         },
         {
-          path:"/society",
-          element:<SocietyForm/>
+          path: "/society",
+          element: <SocietyForm />,
         },
         {
           path: "/produits/:category?",
-          element: (
-              <ProdcutLayout />
-          ),
+          element: <ProdcutLayout />,
         },
         {
           path: "/produit/:id",
-          element: (
-              <Product />
-          ),
+          element: <Product />,
         },
         {
           path: "/connexion",
@@ -237,10 +230,9 @@ function App() {
     },
   ]);
   return (
-      <GoogleOAuthProvider clientId="648490929847-l0v62v1c3fus1k7id2c7ug20tr6rt28m.apps.googleusercontent.com">
-        <RouterProvider router={router} />
-      </GoogleOAuthProvider>
-
+    <GoogleOAuthProvider clientId="648490929847-l0v62v1c3fus1k7id2c7ug20tr6rt28m.apps.googleusercontent.com">
+      <RouterProvider router={router} />
+    </GoogleOAuthProvider>
   );
 }
 
