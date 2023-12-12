@@ -45,7 +45,7 @@ const GridItem = ({ item }) => {
       alert("Stock is limited for this item");
     }
   };
-
+  console.log(user)
   return (
     <>
       {loading || pending ? (
@@ -73,14 +73,8 @@ const GridItem = ({ item }) => {
             <p>{item.typefood || <Skeleton />} </p>
           </div>
           <div className="price-item">
-            {/* {user.accountType === "Personal" ? (
-              <span>{item.priceForPersonal}TND </span>
-            ) : user.accountType === "Society" ? (
-              <span>{item.priceForSociety}TND </span>
-            ) : (
-              <span>{item.priceForPersonal}TND</span>
-            )} */}
-            {!user || user.accountType === "Personal" && <span>{item.priceForPersonal}TND </span>}
+            {user.accountType !== "Personal" && user.accountType !== "Society" && <span>{item.priceForPersonal}TND </span>}
+            {user.accountType === "Personal" && <span>{item.priceForPersonal}TND </span>}
             {user.accountType === "Society" && <span>{item.priceForCompany}TND </span>}
           </div>
           {

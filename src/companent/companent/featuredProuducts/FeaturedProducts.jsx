@@ -11,7 +11,6 @@ const FeaturedProducts = ({ }) => {
   const filtreddata = [...data].sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
   );
-  console.log(data)
   return (
     <div className="featured">
       <div className="wrapper">

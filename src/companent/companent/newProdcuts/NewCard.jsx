@@ -9,7 +9,7 @@ const NewCard = ({ item }) => {
   const loading = useSelector((state) => state.product.loding);
   const pending = useSelector((state) => state.product.pending);
   const error = useSelector((state) => state.product.error);
-  console.log(user)
+
   return (
     <>
       {loading || pending ? (
