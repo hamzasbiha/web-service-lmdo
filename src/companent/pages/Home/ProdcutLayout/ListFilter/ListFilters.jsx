@@ -82,7 +82,7 @@ const ListFilters = ({ data, onFilterChange, sortedData, setSortedData }) => {
   }, [selectedTypefoods, sort, maxPrice]);
   const handleCheckrest = (e) => {
     if (e.target.checked) {
-      setISChecked(!isChecked);
+      setISChecked(false);
     }
   };
   return (
@@ -206,9 +206,8 @@ const ListFilters = ({ data, onFilterChange, sortedData, setSortedData }) => {
             <h1>Market</h1>
             <div onClick={() => setShoingMarket(!showingMarket)}>
               <ArrowForwardIos
-                className={`Arrow-filter ${
-                  showingMarket ? "Showing-showingMarket" : ""
-                }`}
+                className={`Arrow-filter ${showingMarket ? "Showing-showingMarket" : ""
+                  }`}
               />
             </div>
           </div>
@@ -238,7 +237,7 @@ const ListFilters = ({ data, onFilterChange, sortedData, setSortedData }) => {
                 id="asc"
                 name="date"
                 value={"asc"}
-                checked={isChecked}
+                // checked={isChecked }
                 onChange={(e) => setSort("asc")}
               />
               <label htmlFor="last">{t("highest_first")}</label>
@@ -249,7 +248,7 @@ const ListFilters = ({ data, onFilterChange, sortedData, setSortedData }) => {
                 id="desc"
                 name="date"
                 value={"desc"}
-                checked={isChecked}
+                // checked={isChecked}
                 onChange={(e) => setSort("desc")}
                 onClick={handleCheckrest}
               />

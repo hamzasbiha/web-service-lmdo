@@ -12,6 +12,7 @@ const SearchBar = ({ setShowSearch, showSearch }) => {
     product.title.toLowerCase().includes(term.toLowerCase())
   );
   console.log(filteredProducts);
+
   return (
     <div className={`search ${showSearch ? "visible" : ""}`}>
       <div className="wrapper">
@@ -38,31 +39,35 @@ const SearchBar = ({ setShowSearch, showSearch }) => {
         {term && (
           <div className="recomd-content">
             <div className="recomd-scrollable">
-              {filteredProducts.map((item) => (
-                <Link
-                  key={item.id}
-                  className="link"
-                  to={`/produit/${item.id}`}
-                  onClick={() => {
-                    setShowSearch(false);
-                    setTerm("");
-                  }}
-                >
-                  <div className="item">
-                    <div className="left">
-                      <img src={item.images[0]} alt="" />
+              {filteredProducts.length === 0 ? (
+                <p>No products found with the search term "{term}"</p>
+              ) : (
+                filteredProducts.map((item) => (
+                  <Link
+                    key={item.id}
+                    className="link"
+                    to={`/produit/${item.id}`}
+                    onClick={() => {
+                      setShowSearch(false);
+                      setTerm("");
+                    }}
+                  >
+                    <div className="item">
+                      <div className="left">
+                        <img src={item.images[0]} alt="" />
+                      </div>
+                      <div className="right">
+                        <h1>{item.title}</h1>
+                        {/* <p>{item.content} </p> */}
+                      </div>
+                      <div className="right">
+                        <h1>{item.priceForPersonal}</h1>
+                        <p> stock :{item.stock} </p>
+                      </div>
                     </div>
-                    <div className="right">
-                      <h1>{item.title}</h1>
-                      {/* <p>{item.content} </p> */}
-                    </div>
-                    <div className="right">
-                      <h1>{item.priceForPersonal}</h1>
-                      <p> stock :{item.stock} </p>
-                    </div>
-                  </div>
-                </Link>
-              ))}
+                  </Link>
+                ))
+              )}
             </div>
           </div>
         )}

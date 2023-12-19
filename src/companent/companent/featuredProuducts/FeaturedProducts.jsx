@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./Featured.scss";
 import NewCard from "../newProdcuts/NewCard";
 import { useSelector } from "react-redux";
-import Skeleton from "react-loading-skeleton";
 import { useTranslation } from "react-i18next";
 const FeaturedProducts = ({ }) => {
   const { t, i18n } = useTranslation();

@@ -6,6 +6,7 @@ const Widget = ({ type }) => {
   const prod = useSelector((state) => state.product.Product);
   const order = useSelector((state) => state.cart.orders);
   const client = useSelector((state) => state.admin.clients);
+  console.log(order)
   let data;
   switch (type) {
     case "user":

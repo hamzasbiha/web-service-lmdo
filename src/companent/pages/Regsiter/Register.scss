@@ -32,7 +32,7 @@ $button-active-blue: #1669f2;
     background-color: #e9ecef;
     max-height: 750px;
     height: 100%;
-    width: 550px;
+    width: 450px;
     padding: 50px;
     // background: url("../../../assets/waves/banner1.jpg");
     background-repeat: no-repeat;
@@ -97,7 +97,7 @@ $button-active-blue: #1669f2;
       gap: 25px;
       .doub-input-item {
         display: flex;
-        max-width: 200px;
+        max-width: 240px;
         justify-content: space-between;
         width: 100%;
         .inputitem {
@@ -110,7 +110,7 @@ $button-active-blue: #1669f2;
       }
       .inputitem {
         display: flex;
-        align-items: start;
+        align-items: center;
         justify-content: center;
         flex-direction: column;
         text-align: center;
@@ -124,12 +124,16 @@ $button-active-blue: #1669f2;
           outline: none;
           border-radius: 10px;
           width: 100%;
+          min-width: 220px;
           padding: 10px;
           background-color: #ced4da;
           font-size: 1em;
           @include sm {
             max-width: 200px;
           }
+        }
+        .input-item-file {
+          font-size: 18px;
         }
         span {
           position: absolute;

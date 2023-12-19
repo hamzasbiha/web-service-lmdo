@@ -45,7 +45,7 @@ const GridItem = ({ item }) => {
       alert("Stock is limited for this item");
     }
   };
-  console.log(user)
+
   return (
     <>
       {loading || pending ? (

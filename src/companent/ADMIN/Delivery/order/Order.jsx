@@ -22,6 +22,7 @@ const Order = () => {
   let totalPrice = 0;
   const token = sessionStorage.getItem("access");
   const order = useSelector((state) => state.cart.currentUserOrder);
+  const loading = useSelector((state) => state.cart.error);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchOrderClient({ id: id, token: token }));
@@ -37,6 +38,7 @@ const Order = () => {
     setChangeStatus(false);
     setToggle(true);
   };
+
   return (
     <div className="order">
       <div className="order-container">
@@ -91,22 +93,22 @@ const Order = () => {
           </div>
         </div>
         <div className="order-container-item">
-          {order && order.order_Items.length !== 0 ? (
+          {order && order.order_Items ? (
             <div className="left">
               <div className="User-info">
                 <div className="top-name">
                   <p>
-                    <span>ID :</span> {order.User.id}
+                    <span>ID :</span> {order.userId}
                   </p>
                   <p>
-                    <span>FullName :</span> {order.User.firstname}
-                    {order.User.lastname}
+                    <span>FullName :</span> {order.User?.firstname}
+                    {order.User?.lastname}
                   </p>
                 </div>
                 <div className="top-name">
                   <p>
                     <span>Email: </span>
-                    {order.User.email}
+                    {order.User?.email}
                   </p>
                 </div>
                 <div className="top-name">
@@ -134,7 +136,7 @@ const Order = () => {
                 <div className="top-name">
                   <p>
                     <span>AccountType: </span>
-                    {order.User.accountType.toLowerCase()}
+                    {order.User?.accountType.toLowerCase()}
                   </p>
                 </div>
               </div>
@@ -146,7 +148,7 @@ const Order = () => {
             <div className="list-orders-client">
               <div>
                 <div>
-                  {order && order.order_Items.length !== 0 ? (
+                  {order.length !== 0 ? (
                     <span>Total Cart : {order.order_Items.length}</span>
                   ) : (
                     <span>no orders</span>
@@ -167,7 +169,7 @@ const Order = () => {
                   </div>
                 </div>
               </div>
-              {order && order.order_Items.length !== 0 ? (
+              {order.length !== 0 ? (
                 order.order_Items.map((item) => {
                   return (
                     <div className="item-orders" key={item.id}>
@@ -179,7 +181,7 @@ const Order = () => {
                         >
                           {
                             (totalPrice += parseFloat(
-                              order.User.accountType !== "SOCITY"
+                              order.User?.accountType !== "SOCITY"
                                 ? item.priceForPersonal
                                 : item.priceForCompany
                             ))
@@ -211,7 +213,7 @@ const Order = () => {
                 <span>somthing wrong </span>
               )}
               {order && order.totalPrice ? (
-                <h1>Total Price: {totalPrice.toFixed(2)} TND</h1>
+                <h1>Total Price: {order.totalPrice.toFixed(2)} TND</h1>
               ) : (
                 <h1>0</h1>
               )}

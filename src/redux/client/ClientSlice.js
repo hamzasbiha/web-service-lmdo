@@ -120,12 +120,22 @@ export const verifyUsere = createAsyncThunk("verify-user", async (token) => {
     throw error; // Propagate the error so that it's captured in the rejected state
   }
 });
-
+export const getcurrentuserforservice = createAsyncThunk(
+  "currentuser",
+  async ({id, token}) => {
+    const res = await axios.get(`${BaseUrl}/users/current-user/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.data;
+  }
+);
 const clientSlice = createSlice({
   name: "user",
   initialState: {
     user: {},
+    currentuser: {},
     pending: false,
+    loading:false,
     error: false,
   },
   reducers: {
@@ -194,6 +204,18 @@ const clientSlice = createSlice({
       .addCase(verifyUsere.rejected, (state) => {
         state.pending = false;
         state.error = true;
+      })
+      .addCase(getcurrentuserforservice.pending, (state) => {
+        (state.pending = true), (state.error = false);
+      })
+      .addCase(getcurrentuserforservice.fulfilled, (state, action) => {
+        state.pending = false;
+        state.error = false;
+        state.currentuser = action.payload
+      })
+      .addCase(getcurrentuserforservice.rejected, (state) => {
+        state.pending = false;
+        state.error = true
       });
   },
 });

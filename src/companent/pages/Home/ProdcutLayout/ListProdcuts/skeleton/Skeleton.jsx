@@ -25,8 +25,31 @@ const Skeleton = ({ type }) => {
       </div>
     );
   };
+  const CardInfoUser = () => {
+    return (
+      <div className="user-det-skele">
+        <div className="list-info-skele">
+        </div>
+        <div className="list-info-skele">
+        </div>
+        <div className="list-info-skele">
+        </div>
+        <div className="list-info-skele">
+        </div>
+        <div className="list-info-skele">
+        </div>
+        <div className="list-info-skele">
+        </div>
+        <div className="list-info-skele">
+        </div>
+        <div className="list-info-skele">
+        </div>
+      </div>
+    );
+  };
   if (type === "featr") return <FeaturedPost />;
   if (type === "grid-item") return <GridItem />;
+  if (type === "card-info") return <CardInfoUser />;
 };
 
 export default Skeleton;

@@ -39,6 +39,7 @@ const Vérificationpaiement = ({
   }, []);
   const userinf = filed.userInformation;
   const totalPrice = calculateTotalPrice();
+  
   const handleAddCart = () => {
     if (Object.entries(oldclient).length !== 0) {
       const orderItems = items.map((item) => ({
@@ -56,6 +57,11 @@ const Vérificationpaiement = ({
             setCurrentStep(3);
             dispatch(restCart());
             console.log("failed");
+          }
+          else {
+            if (action.type === "cart/rejected") {
+              console.log("Failed")
+            }
           }
         })
         .catch((error) => {
@@ -93,43 +99,48 @@ const Vérificationpaiement = ({
             <div className="list-info">
               <div className="item-info-list">
                 <b>
-                  {carrt &&  carrt.order_Items !== 0
+                  {/* {carrt &&  carrt.order_Items !== 0
                     ? oldclient.User.fullname
-                    : filed.userInformation.fullname}
+                    : filed.userInformation.fullname} */}
+                  {filed.userInformation.fullname}
                 </b>
               </div>
               <div className="item-info-list">
                 <b>
-                  {carrt && carrt.order_Items !== 0
+                  {/* {carrt && carrt.order_Items !== 0
                     ? oldclient.User.email
-                    : filed.userInformation.email}
+                    : filed.userInformation.email} */}
+                  {filed.userInformation.email}
                 </b>
               </div>
               <div className="item-info-list">
                 <b>
-                  {carrt && carrt.order_Items !== 0
+                  {/* {carrt && carrt.order_Items !== 0
                     ? oldclient.adresse
-                    : filed.userInformation.adresse}
+                    : filed.userInformation.adresse} */}
+                  {filed.userInformation.adresse}
                 </b>
               </div>
               <div className="item-info-list">
                 <b>
-                  {carrt && carrt.order_Items !== 0
+                  {/* {carrt && carrt.order_Items !== 0
                     ? oldclient.codepos
-                    : filed.userInformation.codepos}
-                  ,
+                    : filed.userInformation.codepos} */}
+                  {filed.userInformation.codepos},
                 </b>
                 <b>
-                  {carrt && carrt.order_Items !== 0
+                  {/* {carrt && carrt.order_Items !== 0
                     ? oldclient.ville
-                    : filed.userInformation.ville}
+                    : filed.userInformation.ville} */}
+                  {filed.userInformation.ville}
                 </b>
               </div>
               <div className="item-info-pos">
                 <b>
-                  {carrt && carrt.order_Items !== 0
+                  {/* {carrt && carrt.order_Items !== 0
                     ? oldclient.phone
-                    : filed.userInformation.phone}
+                    : filed.userInformation.phone} */}
+                  {filed.userInformation.phone}
                 </b>
               </div>
             </div>

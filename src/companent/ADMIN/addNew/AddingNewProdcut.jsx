@@ -9,9 +9,43 @@ import { useDispatch } from "react-redux";
 import { addProductApi } from "../../../redux/products/productSlice";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import PropTypes from 'prop-types';
+import CircularProgress from '@mui/material/CircularProgress';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 import "react-toastify/dist/ReactToastify.css";
 import "./Add.scss";
-
+function CircularProgressWithLabel(props) {
+  return (
+    <Box sx={{ position: 'relative', display: 'inline-flex' }}>
+      <CircularProgress variant="determinate" {...props} />
+      <Box
+        sx={{
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+          position: 'absolute',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Typography variant="caption" component="div" color="text.secondary">
+          {`${Math.round(props.value)}%`}
+        </Typography>
+      </Box>
+    </Box>
+  );
+}
+CircularProgressWithLabel.propTypes = {
+  /**
+   * The value of the progress indicator for the determinate variant.
+   * Value between 0 and 100.
+   * @default 0
+   */
+  value: PropTypes.number.isRequired,
+};
 const AddingNewProdcut = () => {
   const token = sessionStorage.getItem("access");
   const dispatch = useDispatch();
@@ -20,7 +54,16 @@ const AddingNewProdcut = () => {
   const [Category, setCategory] = useState("");
   const [selectedimg, setSelectedImage] = useState(0);
   const [ArraImage, setArraImage] = useState([]);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [progress, setProgress] = React.useState(10);
 
+  React.useEffect(() => {
+    // If upload is complete, set progress to 100%
+    if (uploadProgress === 100) {
+      setProgress(100);
+    }
+  }, [uploadProgress]);
+  
   const handleFileChange = (e) => {
     const files = e.target.files;
     const selectedFileArray = Array.from(files);
@@ -48,7 +91,7 @@ const AddingNewProdcut = () => {
     dispatch(addProductApi({ token: token, product: finalVal })).then(
       (action) => {
         if (action.type === "product/create/fulfilled") {
-          toast.success("Congralation you add new product to your shop", {
+          toast.success("Product Has Been Added", {
             position: "top-right",
             autoClose: 2000,
             hideProgressBar: false,
@@ -73,27 +116,35 @@ const AddingNewProdcut = () => {
       }
     );
   };
-
+  const handleImageUpload = async () => {
+    try {
+      const uploadedImages = [];
+      for (const [index, file] of selectedFiles.entries()) {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", "bgze1za2");
+        const response = await axios.post(
+          "https://api.cloudinary.com/v1_1/drywnffrv/image/upload",
+          formData,
+          {
+            onUploadProgress: (progressEvent) => {
+              const percentCompleted = Math.round(
+                (progressEvent.loaded * 100) / progressEvent.total
+              );
+              setUploadProgress(percentCompleted);
+            },
+          }
+        );
+        uploadedImages.push(response.data.secure_url);
+      }
+      setArraImage(uploadedImages);
+    } catch (error) {
+      console.error(`Error uploading images to Cloudinary:`, error);
+    }
+  };
   useEffect(() => {
     if (selectedFiles.length > 0) {
-      const handleImageUpload = async () => {
-        try {
-          const uploadedImages = [];
-          for (const file of selectedFiles) {
-            const formData = new FormData();
-            formData.append("file", file);
-            formData.append("upload_preset", "bgze1za2");
-            const response = await axios.post(
-              "https://api.cloudinary.com/v1_1/drywnffrv/image/upload",
-              formData
-            );
-            uploadedImages.push(response.data.secure_url);
-          }
-          setArraImage(uploadedImages);
-        } catch (error) {
-          console.error(`Error uploading images to Cloudinary:`, error);
-        }
-      };
+
       handleImageUpload();
     }
   }, [selectedFiles]);
@@ -108,20 +159,29 @@ const AddingNewProdcut = () => {
         <div className="bottom-add">
           <div className="left-add">
             <div className="mainimg">
-              <img
+              {progress > 10 ? <div style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+              }}><CircularProgressWithLabel value={uploadProgress} /></div> : <img
                 alt=""
                 src={
                   ArraImage && ArraImage.length !== 0
                     ? ArraImage[selectedimg]
                     : defImage
                 }
-              />
+              />}
             </div>
             <div className="row-imgs">
-              {ArraImage?.length !== 0 ? (
-                ArraImage?.map((item, index) => {
-                  console.log(item);
-                  return (
+              {progress > 10 ? (
+                <div style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center"
+                }}> <CircularProgressWithLabel value={progress} /></div>
+              ) : (
+                ArraImage?.length !== 0 ? (
+                  ArraImage.map((item, index) => (
                     <div key={index}>
                       <img
                         alt=""
@@ -129,15 +189,16 @@ const AddingNewProdcut = () => {
                         onClick={() => setSelectedImage(index)}
                       />
                     </div>
-                  );
-                })
-              ) : (
-                <div className="row-imgs">
-                  <img alt="" src={defImage} />
-                  <img alt="" src={defImage} />
-                  <img alt="" src={defImage} />
-                </div>
+                  ))
+                ) : (
+                  <div className="row-imgs">
+                    <img alt="" src={defImage} />
+                    <img alt="" src={defImage} />
+                    <img alt="" src={defImage} />
+                  </div>
+                )
               )}
+
             </div>
           </div>
           <div className="right-add">
@@ -245,6 +306,7 @@ const AddingNewProdcut = () => {
             </form>
           </div>
         </div>
+
       </div>
     </div>
   );

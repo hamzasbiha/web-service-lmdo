@@ -44,6 +44,7 @@ import CartMobile from "./companent/pages/Cart/CartMobile";
 import SocietyForm from "./companent/pages/SelectTypeAccount/SocietyForm/SocietyForm";
 import "./theme/dark.scss";
 import "./App.scss";
+import ClientRequest from "./companent/ADMIN/client-setting/ClientRequest";
 
 const Layout = () => {
   return (
@@ -128,6 +129,11 @@ function App() {
             {
               path: "client-list",
               element: <Clientlist />,
+            },
+
+            {
+              path: "client-request/:id",
+              element: <ClientRequest />
             },
             {
               path: "sells",

@@ -3,10 +3,10 @@ import axios from "axios";
 import { BaseUrl } from "../api/URL";
 
 export const addCartApi = createAsyncThunk("cart", async ({ info, token }) => {
-
   const res = await axios.post(`${BaseUrl}/cart/create`, info, {
     headers: { Authorization: `Bearer ${token}` },
   });
+
   return res.data;
 });
 

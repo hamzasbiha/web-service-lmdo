@@ -10,19 +10,19 @@ $button-active-blue: #1669f2;
   justify-content: center;
   padding: 80px;
   @include sm {
-    padding: 10px;
-    align-items: center;
-    max-width: 100px;
+    // padding: 10px;
+    flex-wrap: wrap;
+    min-width: 200px;
     form {
-      max-width: 400px;
-      padding: 16px;
+      // max-width: 400px;
+      // padding: 16px;
       h1 {
         font-size: 10px;
       }
     }
   }
   @include md {
-    padding: 150px;
+    padding: 180px;
   }
   @include lg {
     padding: 150px;
@@ -76,10 +76,10 @@ $button-active-blue: #1669f2;
           padding: 10px;
           background-color: #ced4da;
           font-size: 1em;
-          @include sm {
-            max-width: 200px;
-            margin-right: 40px;
-          }
+          // @include sm {
+          //   max-width: 200px;
+          //   margin-right: 40px;
+          // }
         }
 
         span {
@@ -89,7 +89,6 @@ $button-active-blue: #1669f2;
           pointer-events: none;
           font-size: 1em;
           text-transform: uppercase;
-      
         }
       }
     }
@@ -100,9 +99,9 @@ $button-active-blue: #1669f2;
       width: 100%;
       gap: 10px;
       font-size: 14px;
-      @include sm {
-        font-size: 11px;
-       }
+      // @include sm {
+      //   font-size: 11px;
+      // }
     }
     button {
       border: none;
@@ -117,12 +116,11 @@ $button-active-blue: #1669f2;
       box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
         rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
       cursor: pointer;
-      @include sm {
-        max-width: 200px;
-        margin-right: 40px;
-      }
+      // @include sm {
+      //   max-width: 200px;
+      //   margin-right: 40px;
+      // }
     }
-
   }
   .prog-circl {
     font-size: 18px;

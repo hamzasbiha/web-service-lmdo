@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import Backdrop from "@mui/material/Backdrop";
 import { styled } from "@mui/material/styles";
-import Button from "@mui/material/Button";
 import "./Register.scss";
 import { Link, useNavigate } from "react-router-dom";
 import GoogleButton from "react-google-button";
@@ -11,29 +9,14 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import { BaseUrl, localUrl } from "../../../api/URL";
-import { current } from "@reduxjs/toolkit";
-import ModelFormSoceity from "./ModelSoceity/ModelFormSoceity";
-import { dark } from "@mui/material/styles/createPalette";
-import { pdf } from "@react-pdf/renderer";
+import { BaseUrl } from "../../../api/URL";
 
-const VisuallyHiddenInput = styled("input")({
-  clip: "rect(0 0 0 0)",
-  clipPath: "inset(50%)",
-  height: 1,
-  overflow: "hidden",
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  whiteSpace: "nowrap",
-  width: 1,
-});
 const Register = () => {
   const navgation = useNavigate();
   const [accounteTypes, setAccounteTypes] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [validet, setValidet] = useState({
-    fullName: "",
+    fullname: "",
     email: "",
     password: "",
     lastname: "",
@@ -42,7 +25,7 @@ const Register = () => {
     nomSociety: "",
     numFiscal: "",
   });
-  const [fullName, setFullName] = useState(false);
+  const [fullname, setFullName] = useState(false);
   const [emailfocused, setEmailFocused] = useState(false);
   const [password, setPassword] = useState(false);
   const [confiPass, setConfiPass] = useState(false);
@@ -51,48 +34,54 @@ const Register = () => {
   const [numFiscal, setNumFiscal] = useState(false);
   const [pdfUrl, setPdfUrl] = useState("");
   const [file, setFile] = useState(null);
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const navigation = useNavigate();
+
+
+  const navigation = useNavigate()
+  //HANDLE ACCOUNTE TYPE
   const handleAccountType = (event) => {
     setAccounteTypes(event.target.value);
   };
   const handleSubmite = async (e) => {
     e.preventDefault();
-    const Formdata = new FormData(e.currentTarget);
-    const data = Object.fromEntries(Formdata);
-    const userData = { ...data, accountType: accounteTypes };
-    console.log(userData.file)
+    const Formdata = new FormData();
+    // Append other form data fields
+
+    // ... append other fields
+
+    const userData = { ...validet, accountType: accounteTypes };
+    console.log(userData)
     const type = userData.accountType;
 
-    if (type === "Personal" || type === "Society") {
-      const res = await axios
+    if (type !== "Society") {
+      axios
         .post(`${BaseUrl}/auth/signup`, userData)
-        .then((res) => res.data)
+        .then((res) => console.log(res.data))
         .catch((error) => {
           console.log(error);
         });
-      // navgation("/connexion");
-      const token = res.accesToken
-      const format = new FormData()
-      format.append('file', userData.file)
-      const resPdf = await axios.post(
-        `${BaseUrl}/auth/upload`,
-        format,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
 
-      console.log(resPdf)
+      navgation("/connexion");
     } else {
-      alert("Invalid account type selected.");
+      if (type === "Society") {
+
+        const formdata = new FormData();
+        formdata.append("file", file);
+        const config = {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        };
+        const pdfres = await axios.post(`${BaseUrl}/auth/upload`, formdata, config)
+        const userDataWithFile = { ...userData, pdfFiles: [pdfres.data] };
+        const res = await axios.post(`${BaseUrl}/auth/signup`, userDataWithFile);
+        navgation("/connexion");
+
+      }
     }
   };
 
 
+  //GOOGLE LOGIN HANDLING 
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       const userInfo = await axios.get(
@@ -124,14 +113,14 @@ const Register = () => {
           <div className="inputitem">
             <span
               style={{
-                transform: fullName
+                transform: fullname
                   ? "translateX(10px) translateY(-17px) "
                   : "",
-                fontSize: fullName ? "1.05em" : "",
-                padding: fullName ? "0 10px" : "",
-                color: fullName ? "#343a40" : "",
+                fontSize: fullname ? "1.05em" : "",
+                padding: fullname ? "0 10px" : "",
+                color: fullname ? "#343a40" : "",
                 transition: "all 0.3s ease",
-                opacity: !fullName && validet.fullName !== "" ? "0" : "100%",
+                opacity: !fullname && validet.fullname !== "" ? "0" : "100%",
               }}
             >
               fullname
@@ -142,7 +131,7 @@ const Register = () => {
               onFocus={() => setFullName(true)}
               onBlur={() => setFullName(false)}
               onChange={(e) =>
-                setValidet({ ...validet, fullName: e.target.value })
+                setValidet({ ...validet, fullname: e.target.value })
               }
               required
             />
@@ -197,7 +186,7 @@ const Register = () => {
               onChange={(e) =>
                 setValidet({ ...validet, password: e.target.value })
               }
-              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
+              // pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
               title="Password must contain at least one lowercase letter, one uppercase letter, one digit, and be at least 8 characters long."
               required
             />
@@ -340,7 +329,7 @@ const Register = () => {
             </Select>
           </FormControl>
         </div>
-        <button>Connexion</button>
+        <button >Connexion</button>
         <span className="or">
           <div className="center">Or</div>
         </span>

@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
 import { Link, Outlet } from "react-router-dom";
 import * as icon from "@mui/icons-material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./admin.scss";
 import { fetchclient } from "../../redux/admin/adminSlice";
 const Admin = () => {
   const token = sessionStorage.getItem("access");
-
+  const loading = useSelector(state => state.user.pending)
   const disptach = useDispatch();
 
   useEffect(() => {
     disptach(fetchclient(token));
-  }, [token]);
+  }, [token, loading]);
   return (
     <div className="ProfilAd">
       <div className="wrapper">

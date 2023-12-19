@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import * as icon from "@mui/icons-material";
 import { useSelector, useDispatch } from "react-redux";
 import "./delivery.scss";
 import { fetchallcart } from "../../../redux/cartSlice";
 const Delivery = () => {
+
   const dispatch = useDispatch();
   const token = sessionStorage.getItem("access");
   const order = useSelector((state) => state.cart.orders);
@@ -14,7 +15,7 @@ const Delivery = () => {
     dispatch(fetchallcart(token));
   }, [token]);
   const columns = [
-    { field: "id", headerName: "ID", width: 70 },
+    { field: "id", headerName: "ID", width: 170 },
     { field: "email", headerName: "email", width: 130 },
     {
       field: "shippingAddress",
@@ -22,8 +23,8 @@ const Delivery = () => {
       width: 130,
       valueGetter: (params) => `${params.row.adresse}`,
     },
-    { field: "ville", headerName: "ville", width: 130 },
-    { field: "phone", headerName: "phone", width: 130 },
+    { field: "ville", headerName: "ville", width: 70 },
+    { field: "phone", headerName: "phone", width: 70 },
     {
       field: "accountType",
       headerName: "accountType",

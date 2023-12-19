@@ -10,7 +10,6 @@ const MobileNavBar = () => {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const token = sessionStorage.getItem("access");
-  const drawer = useSelector((state) => state.alert.showdrawer);
   const user = useSelector((state) => state.user.user);
   const [ShowSide, setShowSide] = useState(false);
   const [DropList, setDropList] = useState(false);
@@ -32,13 +31,6 @@ const MobileNavBar = () => {
       setSlideList(!slideList);
     } else {
       setDropListLnag(!DropListLang);
-    }
-  };
-  const handleAccountSelection = () => {
-    if (stretchSide) {
-      setSlideListAcc(!slideListAcc);
-    } else {
-      setDropList(!DropList);
     }
   };
   return (
@@ -71,9 +63,8 @@ const MobileNavBar = () => {
           {!ShowSide ? <Icon.Menu /> : <Icon.Close />}
         </div>
         <div
-          className={`nav-item-link ${ShowSide ? "Show" : ""} ${
-            stretchSide ? "stretch-side" : ""
-          }`}
+          className={`nav-item-link ${ShowSide ? "Show" : ""} ${stretchSide ? "stretch-side" : ""
+            }`}
         >
           {ShowSide && (
             <div
@@ -90,18 +81,18 @@ const MobileNavBar = () => {
           )}
           <ul className={`${stretchSide ? "stretch-side" : ""}`}>
             {/* {token && <li>Profile</li>} */}
-            <Link to={"/"} className="link">
+            <Link to={"/"} className="link" onClick={() => setShowSide(false)} >
               <li>
                 <Icon.Home /> <p> {t("Boutique")}</p>
               </li>
             </Link>
-            <li onClick={scrollToBottom}>
+            <li onClick={() => { scrollToBottom(); setShowSide(false) }} >
               <span>
                 <Icon.ChatSharp />
               </span>
               <p>Contact</p>
             </li>
-            <Link className="link" to="/produits/Chien">
+            <Link className="link" to="/produits/Chien" onClick={() => setShowSide(false)}>
               <li>
                 <span>
                   <svg
@@ -117,7 +108,7 @@ const MobileNavBar = () => {
                 <p> {t("Chien")}</p>
               </li>
             </Link>
-            <Link className="link" to="/produits/Chat">
+            <Link className="link" to="/produits/Chat" onClick={() => setShowSide(false)}>
               <li>
                 <span>
                   <svg
@@ -132,7 +123,7 @@ const MobileNavBar = () => {
                 <p> {t("Chats")}</p>
               </li>
             </Link>
-            <Link className="link" to="/produits/Oiseaux">
+            <Link className="link" to="/produits/Oiseaux" onClick={() => setShowSide(false)}>
               <li>
                 <span>
                   <svg
@@ -148,7 +139,7 @@ const MobileNavBar = () => {
               </li>
             </Link>
             {!token ? (
-              <Link className="link" to="/Connexion">
+              <Link className="link" to="/Connexion" onClick={() => setShowSide(false)}>
                 <li>
                   <span>
                     <svg
@@ -164,7 +155,7 @@ const MobileNavBar = () => {
                 </li>
               </Link>
             ) : (
-              <Link className="link" to={`/profile/{user.id}`}>
+              <Link className="link" to={`/profile/{user.id}`} onClick={() => setShowSide(false)}>
                 <li>
                   <span>
                     <svg
@@ -181,7 +172,7 @@ const MobileNavBar = () => {
               </Link>
             )}
             <div className="drop-item">
-              <Link to={"/order-mobile"} className="link">
+              <Link to={"/order-mobile"} className="link" onClick={() => setShowSide(false)}>
                 <li>
                   <span>
                     <Icon.ShoppingCart />
@@ -196,9 +187,8 @@ const MobileNavBar = () => {
                 <p>Lang</p>
                 <span>
                   <Icon.ArrowForwardIos
-                    className={`icon-arrow-drop ${
-                      DropListLang ? "IsDroped" : ""
-                    } `}
+                    className={`icon-arrow-drop ${DropListLang ? "IsDroped" : ""
+                      } `}
                   />
                 </span>
               </div>

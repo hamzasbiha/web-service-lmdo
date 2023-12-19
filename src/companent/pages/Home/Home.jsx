@@ -10,30 +10,35 @@ import { useSelector } from "react-redux";
 import ProdcutLayout from "./ProdcutLayout/ProdcutLayout";
 import MapStore from "../../Map/MapStore";
 import { ToastContainer } from "react-toastify";
-import GridLayoutFilter from "../../companent/GridLayoutFilter/GridLayoutFilter";
+import CustomizedSnackbars from "./ProdcutLayout/snackBar/SnackBar";
 import { fetchProdcuts } from "../../../redux/products/productSlice";
+
 const Home = () => {
   const dispatch = useDispatch();
   let token = sessionStorage.getItem("access");
 
   const user = useSelector((state) => state.user.user);
+  const showSnackbar = user.notifcation === 'Notify';
+
   useEffect(() => {
     if (token) {
       dispatch(fetchUserApi(token));
       dispatch(fetchSingleCart({ id: user.id, token: token }));
-      dispatch(fetchProdcuts())
+      dispatch(fetchProdcuts());
     }
   }, [token]);
+
   return (
     <div className="home">
       <Banner />
       <ToastContainer />
       <FeaturedProducts type={"new"} />
-      {/* <GridLayoutFilter /> */}
       <ProdcutLayout />
       <Announcement />
       <FeaturedProducts type={"trending"} />
       <MapStore />
+
+      {showSnackbar && <CustomizedSnackbars show={showSnackbar} />}
     </div>
   );
 };

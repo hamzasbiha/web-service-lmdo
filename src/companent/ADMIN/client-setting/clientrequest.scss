@@ -1,0 +1,102 @@
+.client-req {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 150vh;
+  padding: 15px;
+  .delivery-container {
+    .top-delivery {
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
+      padding: 20px;
+      margin: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 10px;
+      color: rgb(235, 47, 14);
+      h1 {
+        display: flex;
+        align-items: center;
+        color: rgb(235, 47, 14);
+        font-size: 20px;
+      }
+    }
+  }
+  .user-detalis {
+    display: flex;
+    padding: 30px;
+    width: 100%;
+    gap: 5px;
+    .req-btn {
+      max-height: 50px;
+      border: none;
+      outline: none;
+      font-weight: bold;
+      color: #f8f9fa;
+      border-radius: 15px;
+      padding: 10px;
+      cursor: pointer;
+      &.acpt {
+        background-color: #87c38f;
+      }
+      &.decli {
+        background-color: #da2c38;
+      }
+    }
+    .list-info {
+      display: flex;
+      align-items: start;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      gap: 5px;
+      width: 100%;
+      max-width: 450px;
+      button {
+        border: none;
+        outline: none;
+        font-weight: bold;
+        cursor: pointer;
+        background-color: #fb8500;
+        padding: 5px;
+        border-radius: 15px;
+        color: #f8f9fa;
+      }
+    }
+  }
+  .pdf-d {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Align the items to the end (right side) */
+    position: relative; /* Position relative for absolute positioning of the button */
+
+    .close-btn {
+      position: absolute; /* Position the button absolutely */
+      top: 10px; /* Adjust the top position as needed */
+      right: 10px; /* Adjust the right position as needed */
+      border: none;
+      outline: none;
+      padding: 5px;
+      font-weight: bold;
+      flex-wrap: wrap;
+      cursor: pointer;
+      background-color: transparent;
+      padding: 5px;
+      border-radius: 15px;
+      color: #f8f9fa;
+    }
+  }
+
+  iframe {
+    min-width: 800px;
+    box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
+      rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    padding: 15px;
+    border-radius: 15px;
+    border: none;
+  }
+}

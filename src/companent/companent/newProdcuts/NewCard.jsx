@@ -16,7 +16,7 @@ const NewCard = ({ item }) => {
         <Skeleton type="featr" />
       ) : (
         <div className="card">
-          <Link to={`produit/${item.id}`} className="link">
+          <Link to={`/produit/${item.id}`} className="link">
             <div className="item-top">
               <div className="image">
                 {<img src={item.images[0]} alt="" loading="lazy" /> || (

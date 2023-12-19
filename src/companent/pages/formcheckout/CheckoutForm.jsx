@@ -11,6 +11,7 @@ const CheckoutForm = ({
   currentStep,
 }) => {
   const [phoneNeeds, setPHoneNeeds] = useState(false);
+  console.log(filed)
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const cartitems = useSelector((state) => state.cart.cart);
@@ -37,7 +38,7 @@ const CheckoutForm = ({
                     type="text"
                     id="fullname"
                     name="fullname"
-                    defaultValue={user.fullname}
+                    defaultValue={user?.fullname}
                     required
                   />
                 </div>
@@ -48,7 +49,7 @@ const CheckoutForm = ({
                   <input
                     type="text"
                     id="email"
-                    defaultValue={user.email}
+                    defaultValue={user?.email}
                     name="email"
                     required
                   />

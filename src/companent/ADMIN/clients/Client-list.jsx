@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchclient } from "../../../redux/admin/adminSlice";
+import CommentsDisabledIcon from '@mui/icons-material/CommentsDisabled';
+import MarkChatReadIcon from '@mui/icons-material/MarkChatRead';
 import { Link } from "react-router-dom";
 import "./client-list.scss";
 
 const Clientlist = () => {
   const client = useSelector((state) => state.admin.clients);
-  console.log(client);
+
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
     {
@@ -28,8 +30,7 @@ const Clientlist = () => {
         return new Intl.DateTimeFormat("en-US").format(updatedAt);
       },
     },
-    { field: "firstname", headerName: "First name", width: 130 },
-    { field: "lastname", headerName: "Last name", width: 130 },
+    { field: "fullname", headerName: "FullName", width: 130 },
     { field: "email", headerName: "email", width: 130 },
     { field: "phonenumber", headerName: "phone", width: 130 },
     { field: "accountType", headerName: "accountType", width: 130 },
@@ -51,17 +52,67 @@ const Clientlist = () => {
     {
       field: "action",
       headerName: "Action",
-      width: 200,
+      width: 100,
       renderCell: (params) => {
         return (
           <div className="cellAction">
-         <Link className="link" to={`order/${params.row.id}`}>
+            <Link className="link" to={`order/${params.row.id}`}>
               <div className="viewButton">View</div>
             </Link>
           </div>
         );
       },
-    },
+    }, {
+      field: "action-2",
+      headerName: "mangement",
+      width: 150,
+
+      renderCell: (params) => {
+        const reqMode = params.row.request;
+        console.log(params.row.notifcation)
+        return <div className="cellAction">
+          {reqMode === "Pending" ? (
+            <Link className="link" to={`/profile-admin/client-request/${params.row.id}`}>
+              <div className="req-btn">Client demande</div>
+            </Link>
+          ) : reqMode === "Accepted" ? (
+            <div className="Acceptd-btn">Accepted</div>
+          ) : reqMode === "Declined" ? (
+            <div className="Declined-btn">Declined</div>
+          ) : reqMode === "NoReq" && (
+            <div className="status-btn">Pas de demande</div>
+          )}
+
+
+        </div>
+      },
+      sortComparator: (v1, v2, cellParams1, cellParams2) => {
+        const orderMap = { Pending: 0, Accepted: 1, Refused: 2 };
+        const order1 = orderMap[cellParams1.row.request];
+        const order2 = orderMap[cellParams2.row.request];
+
+        if (order1 < order2) {
+          return -1;
+        } else if (order1 > order2) {
+          return 1;
+        } else {
+          return 0;
+        }
+      },
+
+
+    }, {
+      field: 'action-3',
+      headerName: "Status",
+      width: 150,
+      renderCell: (params) => {
+        const noti = params.row.notifcation
+        return <div>
+          {noti === "Notify" && <span><MarkChatReadIcon/></span>}
+          {noti === "HasNotify" && <span><CommentsDisabledIcon/></span>}
+        </div>
+      }
+    }
   ];
   return (
     <div className="client-list">

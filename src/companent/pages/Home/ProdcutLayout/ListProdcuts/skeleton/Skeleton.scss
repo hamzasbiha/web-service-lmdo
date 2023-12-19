@@ -81,3 +81,20 @@
     border-radius: 5px;
   }
 }
+.user-det-skele {
+  display: flex;
+  flex-direction: column;
+  animation: skeleton 1s ease infinite alternate;
+  gap: 15px;
+  padding: 30px;
+  width: 400px;
+  height: 150px;
+  background-color: rgb(156, 154, 154);
+  border-radius: 15px;
+  .list-info-skele {
+    height: 45px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: rgb(116, 113, 113);
+  }
+}
